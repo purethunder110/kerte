@@ -17,6 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+#service views
+from service.views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',firstpage,name="firstpage")
 ]
