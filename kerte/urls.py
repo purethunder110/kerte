@@ -22,5 +22,9 @@ from service.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',firstpage,name="firstpage")
+    path('',firstpage,name="firstpage"),
+    path('signup/',signup,name="signup"),
+    path('login/',login,name="login"),
+    path('contact/',contactUs,name="contact"),
+    path('newpost/',NewPost,name="Newpost"),
 ]
