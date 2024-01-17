@@ -1,5 +1,8 @@
 {
     "builds": [{
+        "config":[{
+            "runtime":"python3.12"
+        }],
         "src": "vercel_app/wsgi.py",
         "use": "@vercel/python"
     }],
