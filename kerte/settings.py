@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-be-2d(j!ccn+1u2@u^g#h##=er)veb15*e2=xnw%+10ud=$0%%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','.vercel.app']
 
 
 # Application definition
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'kerte.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : os.getenv("DB_DATABASE"),
-        'USER' : os.getenv("DB_USER"),
-        'PASSWORD':os.getenv("DB_PASSWORD"),
-        'HOST':os.getenv("DB_HOST"),
-        'PORT':os.getenv("DB_PORT"),
+        'NAME' : os.getenv("POSTGRES_DATABASE"),
+        'USER' : os.getenv("POSTGRES_USER"),
+        'PASSWORD':os.getenv("POSTGRES_PASSWORD"),
+        'HOST':os.getenv("POSTGRES_HOST"),
+       # 'PORT':os.getenv("DB_PORT"),
     }
 }
 
