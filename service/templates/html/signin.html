@@ -16,7 +16,7 @@
 <div class="box-form">
 	<div class="left">
 		<div class="overlay">
-		<h1>Hello World.</h1>
+		<h1>Kerte</h1>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 		Curabitur et est sed felis aliquet sollicitudin</p>
 		<span>
@@ -30,27 +30,44 @@
 	</div>
 	
 	
-		<div class="right">
+	<div class="right">
 		<h5>Login</h5>
-		<p>Don't have an account? <a href="C:\Users\Divyanshu\OneDrive\Desktop\New folder\Responsive Registration Form\signup.html">Create Your Account</a></p> <!--check for link-->
-		<div class="inputs">
-			<input type="text" placeholder="user name">
+		<p>Don't have an account? <a href="/signup">Create Your Account</a></p>
+		<form method="post">
+		  <div class="inputs">
+			<input id="loginuser" type="text" placeholder="Username">
 			<br>
-			<input type="password" placeholder="password">
-		</div>
-			<br><br>
-		<div class="remember-me--forget-password">
-				<!-- Angular -->
-	<label>
-		<input type="checkbox" name="item" checked/>
-		<span class="text-checkbox">Remember me</span>
-	</label>
-			<p>forget password?</p>
-		</div>
-			<br>
-			<button>Login</button>
-	</div>
+			<input id="loginpassword" type="password" placeholder="Password">
+		  </div>
+		  <br><br>
+		  <div class="remember-me--forget-password">
+			<label>
+			  <input type="checkbox" name="item" checked/>
+			  <span class="text-checkbox">Remember me</span>
+			</label>
+			<p>Forget password?</p>
+		  </div>
+		  <br>
+		  <button type="button" id="loginButton" >Login</button>
+		</form>
+	  </div>
 </div>
-<!-- partial -->
+<!-- script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+
+	document.getElementById("loginButton").addEventListener("click", function(){
+		data=new FormData();
+
+		data.append("LoginDetails","true")
+		data.append("csrfmiddlewaretoken","{{csrf_token}}")
+		data.append("username",document.getElementById("loginuser").value);
+		data.append("password",document.getElementById("loginpassword").value);
+
+		axios.post('',data)
+		.catch(error=>console.log(error));
+
+	});
+</script>
 </body>
 </html>
