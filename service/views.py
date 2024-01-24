@@ -21,9 +21,9 @@ def signup(request):
 
 def loginpage(request):
     if request.method=="GET":
-        return render(request,"html/signin.html")
+        return render(request,"login.html")
     if request.method=="POST":
-        if "LoginDetails" in request.POST:
+        if "username" in request.POST:
             name=request.POST.get("username")
             password=request.POST.get("password")
             user_auth=authenticate(username=name,password=password)
