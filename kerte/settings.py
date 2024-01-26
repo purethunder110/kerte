@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'service',
+    'storages',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -91,8 +93,29 @@ if DEBUG == "False":
             'USER' : os.getenv("POSTGRES_USER"),
             'PASSWORD':os.getenv("POSTGRES_PASSWORD"),
             'HOST':os.getenv("POSTGRES_HOST"),
+            "PORT":os.getenv("POSTGRES_PORT"),
         }
     }
+    #AWS
+    AWS_ACCESS_KEY_ID=os.getenv("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY=os.getenv("AWS_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME=os.getenv("AWS_STORAGE_BUCKET_NAME")
+    AWS_S3_CUSTOM_DOMAIN='%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_S3_FILE_OVERWRITE=False
+    AWS_S3_CUSTOM_DOMAIN=os.getenv("AWS_S3_CUSTOM_DOMAIN")
+
+    STORAGES={
+        #for media file storage
+        "default":{
+            "BACKEND":"storages.backends.s3boto3.S3StaticStorage",
+        },
+
+        #for css/js
+        "staticfiles":{
+            "BACKEND":"storages.backends.s3boto3.S3StaticStorage",
+        }
+    }
+
 else:
     DATABASES = {
         'default': {
@@ -104,6 +127,10 @@ else:
             'PORT':os.getenv("DB_PORT"),
         }
     }
+
+    STATICFILES_DIRS=[
+        BASE_DIR / "node_modules",
+    ]
 
 
 # Password validation
@@ -143,10 +170,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS=[
-    BASE_DIR / "node_modules",
-]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+'''PWA CONFIGURATION'''
+
+PWA_APP_NAME="kerte"
+PWA_APP_DESCRIPTION="app"
+PWA_APP_THEME_COLOR="#1ba0e3"
+PWA_APP_BACKGROUND_COLOR="#1ba0e3"
+PWA_APP_DISPLAY="standalone"
+PWA_APP_SCOPE='/'
+PWA_APP_ORIENTATION="Portrait"
+PWA_APP_START_URL='/'
+PWA_APP_STATUS_BAR_COLOR='default'
+PWA_APP_ICONS=[
+    {
+        'src':'',
+        'sizes':'160x160'
+    }
+]
+
+PWA_APP_ICONS_APPLE=[
+    {
+        'src':'',
+        'size':'160x160'
+    }
+]
+
+PWA_APP_SPLASH_SCREEN=[
+    {
+        'src':'',
+        'media':'(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+
+PWA_APP_LANG='en-US'
