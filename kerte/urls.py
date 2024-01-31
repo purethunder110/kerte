@@ -25,7 +25,8 @@ urlpatterns = [
     #pwa config end
     path('admin/', admin.site.urls),
     path('err/',err,name="err"),
-    path('',Homepage,name="Home"),
+    path('home/',Homepage),
+    path('',landingPage,name="Home"),
     path('signup/',signup,name="signup"),
     path('login/',loginpage,name="login"),
     path('contact/',contactUs,name="contact"),

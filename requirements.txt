@@ -5,6 +5,7 @@ Django==5.0.1
 django-pwa==1.1.0
 django-storages==1.14.2
 jmespath==1.0.1
+pillow==10.2.0
 psycopg2==2.9.9
 python-dateutil==2.8.2
 python-dotenv==1.0.0

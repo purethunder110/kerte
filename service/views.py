@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def Homepage(request):
-    return HttpResponse("everything works")
+    return render(request,"home.html")
 
 def signup(request):
     if request.method=="GET":
@@ -43,6 +43,12 @@ def contactUs(request):
 #@login_required(login_url="/login")
 def NewPost(request):
     return render(request,"html/post.html")
+
+
+def landingPage(request):
+    return HttpResponse("this is the landing page")
+
+
 
 def err(request):
     return HttpResponse("<h1>Internal error occured</h1>")
