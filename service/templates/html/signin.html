@@ -1,73 +1,43 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'css/signinstyle.css' %}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="{% static 'css/signinstyle.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class="box-form">
-	<div class="left">
-		<div class="overlay">
-		<h1>Kerte</h1>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		Curabitur et est sed felis aliquet sollicitudin</p>
-		<span>
-			<p>login with social media</p>  <!--check for link-->
-			<a href="https://accounts.google.com/v3/signin/identifier?hl=en-gb&ifkv=AYZoVhdAmOkqJkje41o72Z2Oei6uRSe__ECski4v4HtipYW6gCtFVEpuwYSwgCJ5XhRgmgkCld64&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-1140610228%3A1697005371217328&theme=glif">
-			<i class="fa fa-google-plus" aria-hidden="true"></i></a>
+    <div class="wrapper">
+        <header>Login</header>
+        <form method="post">
+            <div class="field email">
+                <div class="input-area">
+                    <input type="text" placeholder="Email Address">
+                    <i class="icon fas fa-envelope"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Email can't be blank</div>
+            </div>
+            <div class="field password">
+                <div class="input-area">
+                    <input type="password" placeholder="Password">
+                    <i class="icon fas fa-lock"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Password can't be blank</div>
+            </div>
+            <div class="pass-txt"><a href="#">Forgot password?</a></div>
+            <input type="Button" id="LoginButton" value="Login">
+        </form>
+        <div class="sign-txt">Not yet member? <a href="C:\Users\Divyanshu\OneDrive\Desktop\profinal\Responsive Registration Form\signup.html">Sign up now</a></div>
+    </div>
 
-			<a href="https://www.facebook.com/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-		</span>
-		</div>
-	</div>
-	
-	
-	<div class="right">
-		<h5>Login</h5>
-		<p>Don't have an account? <a href="/signup">Create Your Account</a></p>
-		<form method="post">
-		  <div class="inputs">
-			<input id="loginuser" type="text" placeholder="Username">
-			<br>
-			<input id="loginpassword" type="password" placeholder="Password">
-		  </div>
-		  <br><br>
-		  <div class="remember-me--forget-password">
-			<label>
-			  <input type="checkbox" name="item" checked/>
-			  <span class="text-checkbox">Remember me</span>
-			</label>
-			<p>Forget password?</p>
-		  </div>
-		  <br>
-		  <button type="button" id="loginButton" >Login</button>
-		</form>
-	  </div>
-</div>
-<!-- script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
+    <script src="{% static 'javascript/signin.js'%}"></script>
 
-	document.getElementById("loginButton").addEventListener("click", function(){
-		data=new FormData();
-
-		data.append("LoginDetails","true")
-		data.append("csrfmiddlewaretoken","{{csrf_token}}")
-		data.append("username",document.getElementById("loginuser").value);
-		data.append("password",document.getElementById("loginpassword").value);
-
-		axios.post('',data)
-		.catch(error=>console.log(error));
-
-	});
-</script>
 </body>
+
 </html>

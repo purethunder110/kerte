@@ -23,7 +23,7 @@ class tags(models.Model):
 class NewPost(models.Model):
     User=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     title=models.CharField(max_length=100)
-    crud_score=models.IntegerField(blank=True,null=True)
+    post_score=models.IntegerField(blank=True,null=True)
     Community=models.ForeignKey(Community,on_delete=models.DO_NOTHING,blank=True,null=True)
     tags=models.ForeignKey(tags,on_delete=models.DO_NOTHING,blank=True,null=True)
     restricted=models.BooleanField(default=False)

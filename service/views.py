@@ -21,7 +21,7 @@ def signup(request):
 
 def loginpage(request):
     if request.method=="GET":
-        return render(request,"login.html")
+        return render(request,"html/signin.html")
     if request.method=="POST":
         if "username" in request.POST:
             name=request.POST.get("username")
@@ -46,7 +46,7 @@ def NewPost(request):
 
 
 def landingPage(request):
-    return HttpResponse("this is the landing page")
+    return render(request,"html/Homepage.html")
 
 
 
