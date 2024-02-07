@@ -6,13 +6,15 @@ class Extend_User(models.Model):
     User_object=models.ForeignKey(User,on_delete=models.CASCADE)
     Actuall_name=models.CharField(max_length=60)
     Age=models.IntegerField()
-    profile_pic=models.ImageField()
+    profile_pic=models.ImageField(default="static/images/DefaultAvatar.jpg")
     checkmark=models.IntegerField()
     premium=models.IntegerField()
+
 
 class Community(models.Model):
     Owner=models.ForeignKey(User,on_delete=models.DO_NOTHING)
     name=models.CharField()
+    restricted=models.BooleanField(default=False)
     description=models.TextField()
 
 class tags(models.Model):

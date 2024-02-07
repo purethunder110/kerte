@@ -21,9 +21,12 @@ from django.urls import path,include
 from service.views import *
 
 urlpatterns = [
+    #new admin sign urls
+    path('grappelli/',include('grappelli.urls')),
+
     path('',include('pwa.urls')),
     #pwa config end
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('err/',err,name="err"),
     path('home/',Homepage),
     path('',landingPage,name="Home"),

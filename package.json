@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^1.6.6",
+    "boxicons": "^2.1.4",
     "remarkable": "^2.0.1",
     "remixicon": "^4.1.0",
     "scrollreveal": "^4.0.9",

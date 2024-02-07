@@ -11,12 +11,14 @@
 </head>
 
 <body>
+    <script src="{% static "axios/dist/axios.js" %}"></script>
     <div class="wrapper">
         <header>Login</header>
-        <form method="post">
+        <form id="LoginForm">
+            <input type="hidden" id="csrfmiddlewaretoken" value="{{csrf_token}}">
             <div class="field email">
                 <div class="input-area">
-                    <input type="text" placeholder="Email Address">
+                    <input type="text" id="LoginID" placeholder="Email Address">
                     <i class="icon fas fa-envelope"></i>
                     <i class="error error-icon fas fa-exclamation-circle"></i>
                 </div>
@@ -24,16 +26,16 @@
             </div>
             <div class="field password">
                 <div class="input-area">
-                    <input type="password" placeholder="Password">
+                    <input type="password" id="LoginPassword" placeholder="Password">
                     <i class="icon fas fa-lock"></i>
                     <i class="error error-icon fas fa-exclamation-circle"></i>
                 </div>
                 <div class="error error-txt">Password can't be blank</div>
             </div>
             <div class="pass-txt"><a href="#">Forgot password?</a></div>
-            <input type="Button" id="LoginButton" value="Login">
+            <input type="Submit" id="submitbutton" value="Login">
         </form>
-        <div class="sign-txt">Not yet member? <a href="C:\Users\Divyanshu\OneDrive\Desktop\profinal\Responsive Registration Form\signup.html">Sign up now</a></div>
+        <div class="sign-txt">Not yet member? <a href="/signup">Sign up now</a></div>
     </div>
 
     <script src="{% static 'javascript/signin.js'%}"></script>
