@@ -6,5 +6,6 @@ urlpatterns=[
     path('signin/'),
     path('Reset/'),
     path('delete/'),
-    path('details/'),   
+    path('details/'), 
+    path('profile/'),
 ]
