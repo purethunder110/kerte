@@ -1,11 +1,10 @@
-from django import path
+from django.urls import path
 from .views import *
 
 urlpatterns=[
-    path(''),
-    path('home/'),
-    path('@post/new'),
-    path('@post/edit/<int:postid>'),
-    path('@post/view/<int:postid>'),
-    path()
+    path('',Homepage,name="homepage"),
+    path('home/',landingPage,name="landingpage"),
+    path('@post/new',remainingurl),
+    path('@post/edit/<int:postid>',remainingurl),
+    path('@post/view/<int:postid>',remainingurl),
 ]

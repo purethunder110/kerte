@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-#service views
+#views
 from service.views import *
+#urls
 
 urlpatterns = [
     #new admin sign urls
@@ -28,10 +29,7 @@ urlpatterns = [
     #pwa config end
     path('admin/', admin.site.urls),
     path('err/',err,name="err"),
-    path('home/',Homepage),
-    path('',landingPage,name="Home"),
-    path('signup/',signup,name="signup"),
-    path('login/',loginpage,name="login"),
     path('contact/',contactUs,name="contact"),
-    path('newpost/',NewPost,name="Newpost"),
+    path('accounts/',include('accounts.urls')),
+    path('',include('LandingPages.urls')),
 ]
