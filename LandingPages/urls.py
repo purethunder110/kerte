@@ -5,6 +5,6 @@ urlpatterns=[
     path('',landingPage,name="landingpage"),
     path('home/',Homepage,name="homepage"),
     path('@post/new',remainingurl),
-    path('@post/edit/<int:postid>',remainingurl),
-    path('@post/view/<int:postid>',remainingurl),
+    path('@post/edit/<uuid:postid>',remainingurl),
+    path('@post/view/<uuid:postid>',remainingurl),
 ]
