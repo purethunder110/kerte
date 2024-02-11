@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'service',
     'storages',
     'pwa',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -182,6 +183,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+'''USER MODEL'''
+AUTH_USER_MODEL='service.Base_user'
+
 
 '''SESSION EXPIRATION CONF'''
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY=True

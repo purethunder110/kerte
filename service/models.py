@@ -1,7 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser   
 from datetime import datetime
+import uuid
+from .managers import base_user_manager
 # Create your models here.
+'''
 class Extend_User(models.Model):
     User_object=models.ForeignKey(User,on_delete=models.CASCADE)
     Actuall_name=models.CharField(max_length=60)
@@ -35,3 +38,12 @@ class NewPost(models.Model):
     Downvote=models.IntegerField()
     dateofpost=models.DateTimeField(default=datetime.now(),blank=False)
     edited=models.DateTimeField(blank=True,null=True)
+'''
+
+class Base_user(AbstractUser):
+    uuid=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
+    Age=models.IntegerField()
+    profile_pic=models.ImageField(default="static/images/DefaultAvatar.jpg",upload_to="static/UserGenerated/profilepic")
+    disabled=models.BooleanField(default=False)
+
+    objects = base_user_manager()
