@@ -9,4 +9,4 @@ def contactUs(request):
     return render(request,"html/contact.html")
 
 def err(request):
-    return HttpResponse("<h1>Internal error occured</h1>")
+    return render(request,"html/error page.html")

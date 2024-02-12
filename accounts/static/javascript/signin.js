@@ -44,21 +44,43 @@ form.onsubmit = (e) => {
     }
 
     if (!eField.classList.contains("error") && !pField.classList.contains("error")) {
-        const typing= validateLoginAndPassword(eInput.value,pInput.value)
-        ID=document.getElementById("LoginID").value;
+        loginID=document.getElementById("LoginID").value;
         password=document.getElementById("LoginPassword").value;
         csrftoken=document.getElementById("csrfmiddlewaretoken").value;
         sendform.append("csrfmiddlewaretoken",csrftoken)
-        sendform.append(typing,ID)
+        sendform.append("LoginID",loginID)
         sendform.append("password",password)
-
-        console.log(eInput.value,pInput.value)
-        console.log(typing)
-
+        
+        axios.post('',sendform)
+        .then(Response=>{
+            location.href=Response.request.responseURL
+        })
+        .catch(error=>{
+            console.log(error)
+        });
+        /*
+        fetch('', {
+            method: 'POST',
+            body: sendform
+          })
+          .then(response => {
+            if (response.ok) {
+              return response.json(); // or response.text() or response.blob() etc.
+            } else {
+              throw new Error('Network response was not ok.');
+            }
+          })
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+          });
+          */
     }
 }
 
-
+/*
 function validateLoginAndPassword(login, password) {
     // Regular expression for username with at least 6 characters and 2 numbers
     const usernameRegex = /^(?=.*[A-Za-z])(?=.*\d.*\d)[A-Za-z\d]{6,}$/;

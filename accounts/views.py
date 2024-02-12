@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponse
-#from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate,login
+from django.urls import reverse
 # Create your views here.
 
 def signupage(request):
@@ -21,18 +21,18 @@ def signinpage(request):
     if request.method=="GET":
         return render(request,"html/signin.html")
     if request.method=="POST":
-        if "username" in request.POST:
-            name=request.POST.get("username")
+        if "LoginID" in request.POST:
+            email=request.POST.get("LoginID")
             password=request.POST.get("password")
-            user_auth=authenticate(username=name,password=password)
+            user_auth=authenticate(email=email,password=password)
             if user_auth is not None:
-                print("asa")
                 login(request,user_auth)
-                return redirect("/newpost")
+                return redirect("/home")
             else:
-                print("asad")
+                print(user_auth)
                 return redirect("/err")
         else:
+            print("test1")
             return redirect("/err")
 
 def remainingurl(response):
