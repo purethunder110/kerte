@@ -40,8 +40,8 @@ ALLOWED_HOSTS = ['127.0.0.1','.vercel.app']
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli.dashboard',
-    'grappelli',
+    #'grappelli.dashboard',
+    #'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'storages',
     'pwa',
     'django_cleanup.apps.CleanupConfig',
+    'guardian',
 ]
 
 MIDDLEWARE = [
@@ -183,6 +184,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+'''DJANGO-GUARDIAN'''
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 '''USER MODEL'''
 AUTH_USER_MODEL='service.Base_user'
