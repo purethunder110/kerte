@@ -40,8 +40,8 @@ ALLOWED_HOSTS = ['127.0.0.1','.vercel.app']
 # Application definition
 
 INSTALLED_APPS = [
-    #'grappelli.dashboard',
-    #'grappelli',
+    'grappelli.dashboard',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -185,7 +185,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+'''DJANGO GRAPPELLLI'''
+
+GRAPPELLI_INDEX_DASHBOARD ='kerte.dashboard.CustomIndexDashboard'
+
 '''DJANGO-GUARDIAN'''
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # this is default
     'guardian.backends.ObjectPermissionBackend',

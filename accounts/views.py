@@ -13,7 +13,7 @@ def signupage(request):
             name=request.POST.get("username")
             password=request.POST.get("password")
             email=request.POST.get("email")
-            userRegister=User.objects.create_user(username=name,password=password,email=email)
+            userRegister=User.objects.create_user(username=name,password=password,email=email,first_name="temp",last_name="temp2",Age=18)
             userRegister.save()
         return render(request,"html/signup.html")
 
@@ -25,7 +25,9 @@ def signinpage(request):
             email=request.POST.get("LoginID")
             password=request.POST.get("password")
             user_auth=authenticate(email=email,password=password)
+            print("this is auth",user_auth)
             if user_auth is not None:
+                print("test1")
                 login(request,user_auth)
                 return redirect("/home")
             else:
