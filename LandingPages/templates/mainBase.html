@@ -19,11 +19,16 @@
         <title>Kerte</title>
     </head>
     <body>
+        <link rel="stylesheet" href="{% static 'css/testbar.css' %}">
+        <!--<nav_barclass class="nav_barclass">
+            <a href="" class="active"></a>
+            <hr>
+            <a href=""></a>
+        </nav_barclass>-->
         <!--========== HEADER ==========-->
         <header class="header">
             <div class="header__container">
-                <img src="assets/img/perfil.jpg" alt="" class="header__img">
-
+                
                 <a href="#" class="header__logo">channel name</a>
     
                 <div class="header__search">
@@ -34,27 +39,47 @@
                 <div class="header__toggle">
                     <i class='bx bx-menu' id="header-toggle"></i>
                 </div>
+
+                <div class="dropdown-profile">
+                    
+                    <img src="assets/img/perfil.jpg" alt="" class="header__img dropcolor">
+                
+                <div class="dropdown-profile-content">
+                    <a href="#" class="nav__dropdown-item">
+                        <i class='bx bx-user nav__icon' ></i>Profile</a>
+
+
+                    <a href="#" class="nav__dropdown-item">Passwords</a>
+                    
+                    <a href="#" class="nav__dropdown-item">
+                        Mail</a>
+                    
+                    <a href="#" class="nav__dropdown-item">
+                        Accounts</a>
+                    
+                    <a href="#" class="nav__dropdown-item">
+                        <i class='bx bx-log-out nav__icon' ></i>logout</a>
+                </div>
+            <div>
             </div>
         </header>
 
         <!--========== NAV ==========-->
+        
         <div class="nav" id="navbar">
+            
             <nav class="nav__container">
+                
                 <div>
-                    <a href="#" class="nav__link nav__logo">
+                    <a href="/@community/create" class="nav__link nav__logo">
                         <i class='bx bxs-disc nav__icon' ></i>
-                        <span class="nav__logo-name">Settings</span>
+                        <span class="nav__logo-name">New Community</span>
                     </a>
     
                     <div class="nav__list">
                         <div class="nav__items">
                             <h3 class="nav__subtitle">Profile</h3>
     
-                            <a href="#" class="nav__link active">
-                                <i class='bx bx-home nav__icon' ></i>
-                                <span class="nav__name">Home</span>
-                            </a>
-                            
                             <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
                                     <i class='bx bx-user nav__icon' ></i>

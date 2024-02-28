@@ -7,4 +7,6 @@ urlpatterns=[
     path('@post/new',remainingurl),
     path('@post/edit/<uuid:postid>',remainingurl),
     path('@post/view/<uuid:postid>',remainingurl),
+    path('@community/create',NewCommunity),
+    path('@community/edit/<uuid:communityid>',UpdateCommunity)
 ]
