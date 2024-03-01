@@ -1,7 +1,12 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate,login
-from django.urls import reverse
+from django.http import JsonResponse
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+
+from PIL import Image
+from io import BytesIO
 # Create your views here.
 
 def signupage(request):
@@ -10,11 +15,55 @@ def signupage(request):
         return render(request,"html/signup.html")
     if request.method=="POST":
         if "SignupDetails" in request.POST:
-            name=request.POST.get("username")
+            first_name=request.POST.get("first_name")
+            last_name=request.POST.get("last_name")
+            Age=request.POST.get("Age")
+            profile_pic=request.FILES.get("profile_pic")
+            username=request.POST.get("username")
             password=request.POST.get("password")
             email=request.POST.get("email")
-            userRegister=User.objects.create_user(username=name,password=password,email=email,first_name="temp",last_name="temp2",Age=18)
-            userRegister.save()
+            #validation on the server side
+            #is not empty
+            if len(username)==0 or len(password)==0 or len(email)==0:
+                return JsonResponse({
+                    'error':'Required Field has invalid Value'
+                    },status=406)
+            #validate email
+            try:
+                validate_email(email)
+            except ValidationError as e:
+                return JsonResponse({
+                    "error":"The Email is not valid"
+                },status=406)
+            #validate profile_pic
+            '''
+            try:
+                profile=Image.open(profile_pic)
+                #width and hight to be 300x300
+                
+                if profile.width>300 or profile.hight>300:
+                    return JsonResponse({
+                        'error':'Profile Picture should be in 300x300 resolution'
+                    },status=406)
+            except:#no profile pic provided, using default pic
+                pass
+                '''
+            #registeration problem occurs
+            userRegister=User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name,Age=Age)
+
+            try:
+                print("registering")
+                userRegister=User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name,Age=Age)
+                userRegister.save()
+                print("registered")
+            except:
+                auth_token=authenticate(email=email,password=password)
+                if auth_token is not None:
+                    return JsonResponse({
+                        'error':'This email is already registered with a account '
+                    },status=406)
+                else:
+                    return JsonResponse({'error':'internal server error while registering'},status=406)
         return render(request,"html/signup.html")
 
 def signinpage(request):
