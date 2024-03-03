@@ -36,7 +36,6 @@ def signupage(request):
                     "error":"The Email is not valid"
                 },status=406)
             #validate profile_pic
-            '''
             try:
                 profile=Image.open(profile_pic)
                 #width and hight to be 300x300
@@ -47,10 +46,8 @@ def signupage(request):
                     },status=406)
             except:#no profile pic provided, using default pic
                 pass
-                '''
             #registeration problem occurs
-            userRegister=User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name,Age=Age)
-
+            
             try:
                 print("registering")
                 userRegister=User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name,Age=Age)

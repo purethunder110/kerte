@@ -9,31 +9,39 @@
     <title>Sign Up</title>
     <!--CSS File-->
     <link rel="stylesheet" href="{% static 'css/signupstyle.css'%}" />
+    <script type="module" src="{% static 'axios/dist/axios.js' %}"></script>
   </head>
   <body>
     <section class="container">
       <header>{{community_header}}</header>
-      <form action="#" class="form">
+      <form class="form">
+        <input type="hidden" id="csrf_token"value="{{csrf_token}}">
+        <div id="errorMessage" style="display: none; color: red;"></div>
         <div class="input-box">
           <label>Name Of the Community</label>
-          <input type="text" placeholder="Enter name" required />
+          <input id="community" type="text" placeholder="Enter name" required />
+        </div>
+        <div class="input-box">
+          <label>Description</label>
+          <input id="Description" type="text" placeholder="Give a Description" required />
         </div>
         </div>
         <div class="gender-box">
           <h3>Restricted</h3>
           <div class="gender-option">
             <div class="gender">
-              <input type="radio" id="check-male" name="gender" checked />
+              <input type="radio" id="check-yes" name="gender" checked />
               <label for="check-male">Yes</label>
             </div>
             <div class="gender">
-              <input type="radio" id="check-female" name="gender" />
+              <input type="radio" id="check-no" name="gender" />
               <label for="check-female">No</label>
             </div>
           </div>
         </div>
-        <button>Submit</button>
+        <button id="submitbtn" >Submit</button>
       </form>
     </section>
+    <script src="{% static 'javascript/community.js' %}"></script>
   </body>
 </html>
