@@ -1,128 +1,75 @@
+{% extends "mainBase.html"%}
 {%load static%}
-<!DOCTYPE html>
-<!-- Code-->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Post</title>
-    <link rel="stylesheet" href="{% static 'css/poststyle.css' %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- FontAweome CDN Link for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-  </head>
-  <body>
-    <div class="container">
-      <div class="wrapper">
-        <section class="post">
-          <header>Create Post</header>
-          <form action="#">
-            <div class="content">
-              <i class="fa fa-user-circle extraClass" aria-hidden="true"></i>
-              <div class="details">
-                <p>UserName</p>
-                <div class="privacy">
-                  <i class="fas fa-user-friends"></i>
-                  <span>Friends</span>
-                  <i class="fas fa-caret-down"></i>
-                </div>
-              </div>
-            </div>
-            <textarea placeholder="What's on your mind, User?" spellcheck="false" required></textarea>
-            <div class="theme-emoji">
-              <img src="icons/theme.svg" alt="theme">
-              <img src="icons/smile.svg" alt="smile">
-            </div>
-            <div class="options">
-              <p>Add to Your Post</p>
-              <ul class="list">
-                <li><img src="{% static 'icons/gallery.svg' %}" alt="gallery"></li>
-                <li><img src="{% static 'icons/tag.svg' %}" alt="gallery"></li>
-                <li><img src="{% static 'icons/emoji.svg' %}" alt="gallery"></li>
-                <li><img src="{% static 'icons/mic.svg' %}" alt="gallery"></li>
-                <li><img src="{% static 'icons/more.svg' %}" alt="gallery"></li>
-              </ul>
-            </div>
-            <button>Post</button>
-          </form>
-        </section>
-        <section class="audience">
-          <header>
-            <div class="arrow-back"><i class="fas fa-arrow-left"></i></div>
-            <p>Select Audience</p>
-          </header>
-          <div class="content">
-            <p>Who can see your post?</p>
-            <span>Your post will show up in News Feed, on your profile and in search results.</span>
-          </div>
-          <ul class="list">
-            <li>
-              <div class="column">
-                <div class="icon"><i class="fas fa-globe-asia"></i></div>
-                <div class="details">
-                  <p>Public</p>
-                  <span>Anyone</span>
-                </div>
-              </div>
-              <div class="radio"></div>
-            </li>
-            <li class="active">  <!--active class for the option checked,  use backend for different selection-->
-              <div class="column">
-                <div class="icon"><i class="fas fa-user-friends"></i></div>
-                <div class="details">
-                  <p>Friends</p>
-                  <span>Your friends</span>
-                </div>
-              </div>
-              <div class="radio"></div>
-            </li>
-            <li>
-              <div class="column">
-                <div class="icon"><i class="fas fa-user"></i></div>
-                <div class="details">
-                  <p>Specific</p>
-                  <span>Only show to some friends</span>
-                </div>
-              </div>
-              <div class="radio"></div>
-            </li>
-            <li>
-              <div class="column">
-                <div class="icon"><i class="fas fa-lock"></i></div>
-                <div class="details">
-                  <p>Only me</p>
-                  <span>Only you can see your post</span>
-                </div>
-              </div>
-              <div class="radio"></div>
-            </li>
-            <li>
-              <div class="column">
-                <div class="icon"><i class="fas fa-cog"></i></div>
-                <div class="details">
-                  <p>Custom</p>
-                  <span>Include and exclude friends</span>
-                </div>
-              </div>
-              <div class="radio"></div>
-            </li>
-          </ul>
-        </section>
-      </div>
+{% block content %}
+<script type="module" src="{% static 'axios/dist/axios.js' %}"></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+<link rel="stylesheet" href="{% static 'css/post.css' %}">
+<div class="container">
+  <div class="text-center">
+    <h2 class="text-center">Post</h2>
+  </div>
+  <input type="hidden" id="csrfmiddlewaretoken" value="{{csrf_token}}">
+  <div>
+    <div>
+      <label>Enter heading:</lable>
+      <input type="text" id="Heading" placeholder="Heading">
     </div>
-
-    <script>
-      const container = document.querySelector(".container"),
-      privacy = container.querySelector(".post .privacy"),
-      arrowBack = container.querySelector(".audience .arrow-back");
-
-      privacy.addEventListener("click", () => {
-        container.classList.add("active");
-      });
-
-      arrowBack.addEventListener("click", () => {
-        container.classList.remove("active");
-      });
-    </script>
-    
-  </body>
-</html>
+    <div>
+      <label>Enter a small description:</lable>
+      <input type="text" id="description" placeholder="Description">
+    </div>
+  </div>
+	<div class="text-right my-3">
+      <button class="btn btn-info" id="getHTML" get-data="editor-1" style="font-weight: 700;">POST</button>
+	</div>
+  <div class="row align-items-center justify-content-center">
+    <div class="col-md-12 col-lg-8">
+			<div class="editor" id="editor-1">
+      <div class="toolbar">
+        <a href="#" data-command='undo' data-toggle="tooltip" data-placement="top" title="Undo"><i class='fa fa-undo'></i></a>
+        <a href="#" data-command='redo' data-toggle="tooltip" data-placement="top" title="Redo"><i class='fa fa-redo '></i></a>
+				<a href="#" data-command='removeFormat' data-toggle="tooltip" data-placement="top" title="Clear format"><i class='fa fa-times '></i></a>
+        <div class="fore-wrapper"><i class='fa fa-font' data-toggle="tooltip" data-placement="top" title="text color"></i>
+          <div class="fore-palette">
+          </div>
+        </div>
+        <div class="back-wrapper"><i class='fa fa-font'  data-toggle="tooltip" data-placement="top" title="Background color"></i>
+          <div class="back-palette">
+          </div>
+        </div>
+        <a href="#" data-command='bold' data-toggle="tooltip" data-placement="top" title="Bold"><i class='fa fa-bold'></i></a>
+        <a href="#" data-command='italic' data-toggle="tooltip" data-placement="top" title="Italic"><i class='fa fa-italic'></i></a>
+        <a href="#" data-command='underline' data-toggle="tooltip" data-placement="top" title="Underline"><i class='fa fa-underline'></i></a>
+        <a href="#" data-command='strikeThrough' data-toggle="tooltip" data-placement="top" title="Stike through"><i class='fa fa-strikethrough'></i></a>
+        <a href="#" data-command='justifyLeft' data-toggle="tooltip" data-placement="top" title="Left align"><i class='fa fa-align-left'></i></a>
+        <a href="#" data-command='justifyCenter'><i class='fa fa-align-center' data-toggle="tooltip" data-placement="top" title="Center align"></i></a>
+        <a href="#" data-command='justifyRight' data-toggle="tooltip" data-placement="top" title="Right align"><i class='fa fa-align-right'></i></a>
+        <a href="#" data-command='justifyFull' data-toggle="tooltip" data-placement="top" title="Justify"><i class='fa fa-align-justify'></i></a>
+        <a href="#" data-command='indent' data-toggle="tooltip" data-placement="top" title="Indent"><i class='fa fa-indent'></i></a>
+        <a href="#" data-command='outdent'  data-toggle="tooltip" data-placement="top" title="Outdent"><i class='fa fa-outdent'></i></a>
+        <a href="#" data-command='insertUnorderedList'  data-toggle="tooltip" data-placement="top" title="Unordered list"><i class='fa fa-list-ul'></i></a>
+        <a href="#" data-command='insertOrderedList' data-toggle="tooltip" data-placement="top" title="Ordered list"><i class='fa fa-list-ol'></i></a>
+        <a href="#" data-command='h1' data-toggle="tooltip" data-placement="top" title="H1">H1</a>
+        <a href="#" data-command='h2'  data-toggle="tooltip" data-placement="top" title="H2">H2</a>
+        <a href="#" data-command='createlink' data-toggle="tooltip" data-placement="top" title="Insert link"><i class='fa fa-link'></i></a>
+        <a href="#" data-command='unlink' data-toggle="tooltip" data-placement="top" title="Unlink"><i class='fa fa-unlink'></i></a>
+        <a href="#" data-command='insertimage' data-toggle="tooltip" data-placement="top" title="Insert image"><i class='fa fa-image'></i></a>
+        <a href="#" data-command='p' data-toggle="tooltip" data-placement="top" title="Paragraph">P</a>
+        <a href="#" data-command='subscript' data-toggle="tooltip" data-placement="top" title="Subscript"><i class='fa fa-subscript'></i></a>
+        <a href="#" data-command='superscript'  data-toggle="tooltip" data-placement="top" title="Superscript"><i class='fa fa-superscript'></i></a>
+      </div>
+          <!--enter data in this page for editing-->
+          <div id='editor' class="editorAria" contenteditable>
+        
+          </div>
+				</div>
+    </div>
+  </div>
+  <div class="post">
+    <button class="btn btn-info post"  get-data="editor-1" input type="submit" id="send">Post</button>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script  src="{% static 'javascript/post.js' %}"></script>
+{% endblock content %}

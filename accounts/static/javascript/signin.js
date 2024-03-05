@@ -20,7 +20,7 @@ form.onsubmit = (e) => {
     pInput.onkeyup = () => { checkPass(); }
 
     function checkEmail() {
-        let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        let pattern = /^([A-Za-z]){6,}$/;
         if (!eInput.value.match(pattern)) {
             eField.classList.add("error");
             eField.classList.remove("valid");

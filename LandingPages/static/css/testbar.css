@@ -32,3 +32,33 @@
   .dropdown-profile:hover .dropcolor {
     background-color: #6923D0;
   }
+
+  /* Styles for the menu */
+  .menu {
+    display: none;
+    position: absolute;
+    top: 40px; /* Adjust as needed */
+    left: 0;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 10px;
+    z-index: 1;
+  }
+
+  /* Styles for the input and button inside the menu */
+  .menu input[type="text"] {
+    margin-right: 10px;
+  }
+
+  /* Style for the button */
+  .menu button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+/* tag selected color*/
+  .btn-tag-selected {
+    background-color: red !important;
+  }

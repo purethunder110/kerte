@@ -25,7 +25,7 @@ document.getElementById("Registeruser").addEventListener("click", function(){
   let profile_pic=document.getElementById('profile_pic');
   let profile=profile_pic.files[0]
   //check if the file is image or not
-  if (profile==undefined && !profile.type.match('image.*')){
+  if (profile==undefined || !profile.type.match('image.*')){
     alert("image not selected")
   }
   else{

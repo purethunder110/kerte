@@ -68,9 +68,9 @@ def signinpage(request):
         return render(request,"html/signin.html")
     if request.method=="POST":
         if "LoginID" in request.POST:
-            email=request.POST.get("LoginID")
+            username=request.POST.get("LoginID")
             password=request.POST.get("password")
-            user_auth=authenticate(email=email,password=password)
+            user_auth=authenticate(username=username,password=password)
             print("this is auth",user_auth)
             if user_auth is not None:
                 print("test1")

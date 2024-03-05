@@ -1,17 +1,17 @@
 
 document.getElementById("submitbtn").addEventListener("click",function(e){
-    e.preventDefault();
+    e.preventDefault()
     const regex = /^[a-zA-Z]{8,}$/;
     var community=document.getElementById("community").value
     var restricted=document.getElementById("check-yes").checked
     const errorMessageElement = document.getElementById('errorMessage');
     //validating the community name
-    if (regex.test(community) && restricted){
+    if (regex.test(community)){
         const form=new FormData()
         form.append("Community_name",community)
         form.append("csrfmiddlewaretoken",document.getElementById("csrf_token").value)
         form.append("restricted",restricted)
-        form.append("description",document.getElementById("Description"))
+        form.append("description",document.getElementById("Description").value  )
         
         axios.post('',form)
         .then(res=>{
