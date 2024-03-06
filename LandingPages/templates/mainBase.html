@@ -13,10 +13,10 @@
         <link rel="stylesheet" href="{% static "css/cardstyle.css" %}">
         <!--prefill-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-        <title>Kerte</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <title>Kerte | {{channel_name}}</title>
     </head>
     <body>
         <link rel="stylesheet" href="{% static 'css/testbar.css' %}">
@@ -30,7 +30,15 @@
             <div class="header__container">
                 
                 <a href="#" class="header__logo">{{channel_name}}</a>
-    
+                {% if channel_name != "Profile" and channel_id %}
+                    {% if designation == "OWNER" %}
+                        <input type="button" value="edit" href="window.location='/@community/edit/{{channel_id}}/'">
+                        <input type="button" value="permission" href="#">
+                    {% endif %}
+                    <input type="button" value="New Post" onclick="window.location='/@post/new/{{channel_id}}'">
+                {% else %}
+                    <!--put in else card-->
+                {% endif %}
                 <div class="header__search">
                     <input type="search" placeholder="Search" class="header__input">
                     <i class='bx bx-search header__icon'></i>
@@ -42,7 +50,7 @@
 
                 <div class="dropdown-profile">
                     
-                    <img src="assets/img/perfil.jpg" alt="" class="header__img dropcolor">
+                    <img src="{{request.user.profile_pic}}" alt="profile" class="header__img dropcolor">
                 
                 <div class="dropdown-profile-content">
                     <a href="#" class="nav__dropdown-item">
@@ -57,7 +65,7 @@
                     <a href="#" class="nav__dropdown-item">
                         Accounts</a>
                     <hr>
-                    <a href="#" class="nav__dropdown-item">
+                    <a href="/logout" class="nav__dropdown-item">
                         <i class='bx bx-log-out nav__icon' ></i>logout</a>
                 </div>
             <div>
@@ -75,64 +83,16 @@
                         <i class='bx bxs-disc nav__icon' ></i>
                         <span class="nav__logo-name">New Community</span>
                     </a>
-    
+                    {% for j in community_sidebar %}
                     <div class="nav__list">
                         <div class="nav__items">
-                            <h3 class="nav__subtitle">Profile</h3>
-    
-                            <div class="nav__dropdown">
-                                <a href="#" class="nav__link">
-                                    <i class='bx bx-user nav__icon' ></i>
-                                    <span class="nav__name">Profile</span>
-                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                                </a>
-
-                                <div class="nav__dropdown-collapse">
-                                    <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">Passwords</a>
-                                        <a href="#" class="nav__dropdown-item">Mail</a>
-                                        <a href="#" class="nav__dropdown-item">Accounts</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <a href="#" class="nav__link">
+                            <a href="/@community/{{j.community.uuid}}" class="nav__link">
                                 <i class='bx bx-message-rounded nav__icon' ></i>
-                                <span class="nav__name">Messages</span>
-                            </a>
-                        </div>
-    
-                        <div class="nav__items">
-                            <h3 class="nav__subtitle">Menu</h3>
-    
-                            <div class="nav__dropdown">
-                                <a href="#" class="nav__link">
-                                    <i class='bx bx-bell nav__icon' ></i>
-                                    <span class="nav__name">Notifications</span>
-                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                                </a>
-
-                                <div class="nav__dropdown-collapse">
-                                    <div class="nav__dropdown-content">
-                                        <a href="#" class="nav__dropdown-item">Blocked</a>
-                                        <a href="#" class="nav__dropdown-item">Silenced</a>
-                                        <a href="#" class="nav__dropdown-item">Publish</a>
-                                        <a href="#" class="nav__dropdown-item">Program</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-compass nav__icon' ></i>
-                                <span class="nav__name">Explore</span>
-                            </a>
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-bookmark nav__icon' ></i>
-                                <span class="nav__name">Saved</span>
+                                <span class="nav__name">{{j.community.name}}</span>
                             </a>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
 
                 <a href="#" class="nav__link nav__logout">

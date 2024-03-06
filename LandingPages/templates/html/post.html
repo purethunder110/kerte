@@ -11,12 +11,21 @@
   <input type="hidden" id="csrfmiddlewaretoken" value="{{csrf_token}}">
   <div>
     <div>
-      <label>Enter heading:</lable>
-      <input type="text" id="Heading" placeholder="Heading">
+      <label>Enter heading:</label>
+      <input type="text" id="Heading" placeholder="Heading" value={{edit_heading}}>
     </div>
     <div>
-      <label>Enter a small description:</lable>
-      <input type="text" id="description" placeholder="Description">
+      <label>Enter a small description:</label>
+      <input type="text" id="description" placeholder="Description" value={{edit_description}}>
+    </div>
+    <div>
+      <label>Tags:</label>
+      <select id="tagselect">
+        <option value="None" selected disabled hidden>Select an option</option>
+        {% for t in Tags %}
+        <option value="{{t.uuid}}">{{t.name}}</option>
+        {% endfor %}
+      </select>
     </div>
   </div>
 	<div class="text-right my-3">
@@ -66,7 +75,7 @@
     </div>
   </div>
   <div class="post">
-    <button class="btn btn-info post"  get-data="editor-1" input type="submit" id="send">Post</button>
+    <button class="btn btn-info post"  get-data="editor-1" input type="submit" id="send" style="text-align:right;">Post</button>
   </div>
 </div>
 <!-- partial -->

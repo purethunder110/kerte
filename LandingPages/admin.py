@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(NewPost)
 admin.site.register(Community)
+admin.site.register(tags)

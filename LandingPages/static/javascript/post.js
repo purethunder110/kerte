@@ -46,9 +46,11 @@ $(document).ready(function(){
         data.append("description",document.getElementById("description").value)
         data.append("data",html)
         data.append("csrfmiddlewaretoken",document.getElementById("csrfmiddlewaretoken").value)
+        data.append("Tag_select",document.getElementById("tagselect").value)
         axios.post('',data)
         .then(result=>{
           console.log("send success")
+          //location.href=result.request.responseURL
         })
         .catch(error=>console.log(error))
         

@@ -14,12 +14,18 @@ class Community(models.Model):
     
     def get_uuid(self):
         return self.uuid
+    
+    def __str__(self) -> str:
+        return f"{self.name}:{self.uuid}"
 
 class tags(models.Model):
     uuid=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     Community=models.ForeignKey(Community,on_delete=models.DO_NOTHING)
     name=models.CharField(10)
     description=models.TextField()
+
+    def __str__(self):
+        return f"{self.Community.name}:{self.name}"
 
 class NewPost(models.Model):
     uuid=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)

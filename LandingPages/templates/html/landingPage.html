@@ -8,6 +8,9 @@
 
                     <h2 class="h2">Tags</h2>
                     <div id="tags">
+                      {% for i in community_tags %}
+                        <input type="button" title={{i.description}} value="{{i.name}}">
+                      {% endfor %}
                       <!--tags here-->
                       </div>
                     <div class="dropdown-profile">
@@ -66,6 +69,11 @@
                           </div>
           
                         </div>
+                        {% if user.username == post.User.username %}
+                        <!---->
+                        <a>delete menu</a>
+                          </span>
+                        {% endif %}
           
                       </div>
                       {% endfor %}
