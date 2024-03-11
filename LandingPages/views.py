@@ -43,7 +43,6 @@ def NewPostPage(request,communityid):
         body_post=request.POST.get("data")
         restricted=community_object.restricted
         print(request.POST.get("Tag_select"),restricted)
-        '''
         create_post=NewPost(
             User=request.user,
             title=heading,
@@ -53,7 +52,7 @@ def NewPostPage(request,communityid):
             restricted=restricted,
             body=body_post,
                             )
-                            '''
+        create_post.save()
         return redirect("/@community/"+str(communityid))
 
 def NewCommunity(request):
