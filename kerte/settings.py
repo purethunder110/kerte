@@ -34,7 +34,7 @@ CSRF_COOKIE_SECURE=True
 
 STATIC_ROOT="STATICFILES"
 
-ALLOWED_HOSTS = ['127.0.0.1','.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1','.vercel.app','*']
 
 
 # Application definition

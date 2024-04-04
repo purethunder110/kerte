@@ -50,7 +50,7 @@ $(document).ready(function(){
         axios.post('',data)
         .then(result=>{
           console.log("send success")
-          //location.href=result.request.responseURL
+          location.href=result.request.responseURL
         })
         .catch(error=>console.log(error))
         

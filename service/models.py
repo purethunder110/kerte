@@ -7,7 +7,7 @@ from .managers import base_user_manager
 class Base_user(AbstractUser):
     uuid=models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False)
     Age=models.IntegerField(null=True)
-    profile_pic=models.ImageField(default="static/images/DefaultAvatar.jpg",upload_to="static/UserGenerated/profilepic")
+    profile_pic=models.ImageField(default="static/images/Default_Stuff/DefaultAvatar.jpg",upload_to="static/UserGenerated/profilepic")
     disabled=models.BooleanField(default=False)
 
     USERNAME_FIELD='username'

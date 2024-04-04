@@ -7,19 +7,21 @@
 
         <!--========== BOX ICONS ==========-->
         <link rel="stylesheet" href="{% static "boxicons/css/boxicons.css" %}">
+        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
         <!--========== CSS ==========-->
         <link rel="stylesheet" href="{% static 'css/landingpage.css' %}">
         <link rel="stylesheet" href="{% static "css/cardstyle.css" %}">
+        <link rel="stylesheet" href="{% static 'css/testbar.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <!--prefill-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>Kerte | {{channel_name}}</title>
     </head>
     <body>
-        <link rel="stylesheet" href="{% static 'css/testbar.css' %}">
         <!--<nav_barclass class="nav_barclass">
             <a href="" class="active"></a>
             <hr>
@@ -28,18 +30,33 @@
         <!--========== HEADER ==========-->
         <header class="header">
             <div class="header__container">
-                
-                <a href="#" class="header__logo">{{channel_name}}</a>
-                {% if channel_name != "Profile" and channel_id %}
-                    {% if designation == "OWNER" %}
-                        <input type="button" value="edit" href="window.location='/@community/edit/{{channel_id}}/'">
-                        <input type="button" value="permission" href="#">
-                    {% endif %}
-                    <input type="button" value="New Post" onclick="window.location='/@post/new/{{channel_id}}'">
-                {% else %}
-                    <!--put in else card-->
+                {% if channel_name != "Profile" %}
+                <a title="Click to share link" href="javascript:navigator.clipboard.writeText(window.location.href)" class="header__logo" >
+                    {{channel_name}}
+                </a>
+                {%else %}
+                <!--a href="javascript:navigator.clipboard.writeText(window.location.href)" class="header__logo"-->
+                <a class="header__logo">{{channel_name}}</a>
                 {% endif %}
-                <div class="header__search">
+                <div class="tags_area">
+                {% if channel_name != "Profile" %}
+                    {% if designation == "OWNER" or designation == "ADMIN" %}
+                        <input type="button" class="nav-tagss" value="edit" href="window.location='/@community/edit/{{channel_id}}/'">
+                        <input type="button" class="nav-tagss" value="permission" onclick="window.location='/@community/perms/{{channel_id}}'">
+                        <input type="button" class="nav-tagss" value="New Post" onclick="window.location='/@post/new/{{channel_id}}/'">
+                    {% elif designation == "New" %}
+                    <input type="button" class="nav-tagss" value="Join Community" onclick="window.location='/@community/join/{{channel_id}}'">
+                    {% elif designation == "MOD" %}
+                    <input type="button" class="nav-tagss" value="New Post" onclick="window.location='/@post/new/{{channel_id}}/'">
+                    {% elif designation == "USER" %}
+                    <input type="button" class="nav-tagss" value="Leave Community" onclick="window.location='/@community/leave/{{channel_id}}'">
+                    <input type="button" class="nav-tagss" value="New Post" onclick="window.location='/@post/new/{{channel_id}}/'">
+                    {% endif %}
+                {% else %}
+                
+                {% endif %}
+                </div>
+                <div class="header__search" style="width:450px">
                     <input type="search" placeholder="Search" class="header__input">
                     <i class='bx bx-search header__icon'></i>
                 </div>
@@ -49,25 +66,43 @@
                 </div>
 
                 <div class="dropdown-profile">
-                    
-                    <img src="{{request.user.profile_pic}}" alt="profile" class="header__img dropcolor">
-                
-                <div class="dropdown-profile-content">
-                    <a href="#" class="nav__dropdown-item">
-                        <i class='bx bx-user nav__icon' ></i>Profile</a>
-
-
-                    <a href="#" class="nav__dropdown-item">Passwords</a>
-                    
-                    <a href="#" class="nav__dropdown-item">
-                        Mail</a>
-                    
-                    <a href="#" class="nav__dropdown-item">
-                        Accounts</a>
-                    <hr>
-                    <a href="/logout" class="nav__dropdown-item">
-                        <i class='bx bx-log-out nav__icon' ></i>logout</a>
-                </div>
+                    <div class="profile-div">    
+                        <img src="{{request.user.profile_pic}}" alt="profile" class="profile-img">
+                        <h4>{{request.user.username}}</h4>
+                    </div>
+                    <div class="dropdown-profile-content">
+                        <!-- <a href="#" class="nav__dropdown-item">
+                            <i class='bx bx-user nav__icon'>
+                                <img src="images/user.png" alt="" srcset="">
+                            </i>
+                            <h4>Profile</h4>
+                        </a> -->
+                        <a href="#" class="nav__dropdown-item">
+                            <i class='bx bx-user nav__icon'>
+                                <img src="images/lock.png" alt="" srcset="">
+                            </i>
+                            <h4>Passwords</h4>
+                        </a> 
+                        <a href="#" class="nav__dropdown-item">
+                            <i class='bx bx-user nav__icon'>
+                                <img src="images/mail.png" alt="" srcset="">
+                            </i>
+                            <h4>Mail</h4>
+                        </a> 
+                        <a href="/home/" class="nav__dropdown-item">
+                            <i class='bx bx-user nav__icon'>
+                                <img src="images/contact-round.png" alt="" srcset="">
+                            </i>
+                            <h4>Profile</h4>
+                        </a>
+                        <hr>
+                        <a href="/accounts/logout" class="nav__dropdown-item">
+                            <i class='bx bx-user nav__icon'>
+                                <img src="images/log-out.png" alt="" srcset="">
+                            </i>
+                            <h4>Logout</h4>
+                        </a>
+                    </div>
             <div>
             </div>
         </header>
@@ -87,7 +122,7 @@
                     <div class="nav__list">
                         <div class="nav__items">
                             <a href="/@community/{{j.community.uuid}}" class="nav__link">
-                                <i class='bx bx-message-rounded nav__icon' ></i>
+                                <!--i class='bx bx-message-rounded nav__icon' ></i-->
                                 <span class="nav__name">{{j.community.name}}</span>
                             </a>
                         </div>
@@ -95,7 +130,7 @@
                     {% endfor %}
                 </div>
 
-                <a href="#" class="nav__link nav__logout">
+                <a href="/accounts/logout" class="nav__link nav__logout">
                     <i class='bx bx-log-out nav__icon' ></i>
                     <span class="nav__name">Log Out</span>
                 </a>

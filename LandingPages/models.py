@@ -38,6 +38,7 @@ class NewPost(models.Model):
     restricted=models.BooleanField(default=False)
     archived=models.BooleanField(default=False)
     body=models.TextField()
+    banner=models.ImageField(default="static/images/Default_Banner.jpg",upload_to="static/UserGenerated/Post_Banner/Post_Banner")
     #Upvote=models.IntegerField()
     #Downvote=models.IntegerField()
     dateofpost=models.DateTimeField(default=timezone.now,blank=False)

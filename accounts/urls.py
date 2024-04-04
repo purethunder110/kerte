@@ -8,4 +8,5 @@ urlpatterns=[
     path('delete/',remainingurl),
     path('details/',remainingurl), 
     path('profile/',remainingurl),
+    path('logout/',logoutsite),
 ]

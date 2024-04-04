@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script type="module" src="{% static 'axios/dist/axios.js' %}"></script>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
+  <link rel="stylesheet" href="{% static 'css/post.css'%}">
+  <link rel="stylesheet" href="{% static 'css/post-style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+  <script src="{% static 'javascript/post.js' %}"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="text-center" style="margin: 0;">Post</h2>
+    <div class="modal show" tabindex="-1" style="position: relative; z-index: 0; display: block;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create Post</h5>
+          </div>
+          <div class="modal-body">
+            <form action="">
+              <input type="hidden" id="csrfmiddlewaretoken" value="{{csrf_token}}">
+              <!-- <div>
+                <div>
+                  <label>Enter heading:</label>
+                  <input type="text" id="Heading" placeholder="Heading">
+                </div>
+                <div>
+                  <label>Enter a small description:</label>
+                  <input type="text" id="description" placeholder="Description">
+                </div>
+                <div>
+                  <label>Tags:</label>
+                  <select id="tagselect">
+                    <option value="None" selected disabled hidden>Select an option</option>
+                    <option value="New">New</option>
+                  </select>
+                </div>
+              </div> -->
+              <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+                <label style="font-size: 15px;">Enter heading : </label>
+                <input type="text" id="Heading" name="" value="{{post_data.title}}" placeholder="Heading">
+              </div>
+              <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+                <label style="font-size: 15px;">Enter a small description : </label>
+                <textarea id="description" placeholder="Enter a small description" class="tag-descrp">{{post_data.description}}</textarea>
+              </div>
+              <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+                <label style="font-size: 15px;">Tags : </label>
+                <select id="tagselect">
+                  {% if post_data %}
+                  <option value="{{post_data.tags.uuid}}" selected disabled hidden>{{post_data.tags.name}}</option>
+                  {% else %}
+                  <option value="None" selected disabled hidden>Select an option</option>
+                  {%for i in Tags%}
+                  <option value="{{i.uuid}}">{{i.name}}</option>
+                  {% endfor %}
+                  {% endif %}
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="row align-items-center" style="margin: 0 0.25rem;">
+            <div class="col-md-12 col-lg-8" style="width: 100%;">
+              <div class="editor" id="editor-1">
+                <div class="toolbar">
+                  <a href="#" data-command='undo' data-toggle="tooltip" data-placement="top" title="Undo"><i
+                      class='fa fa-undo'></i></a>
+                  <a href="#" data-command='redo' data-toggle="tooltip" data-placement="top" title="Redo"><i
+                      class='fa fa-redo '></i></a>
+                  <a href="#" data-command='removeFormat' data-toggle="tooltip" data-placement="top" title="Clear format"><i
+                      class='fa fa-times '></i></a>
+                  <div class="fore-wrapper"><i class='fa fa-font' data-toggle="tooltip" data-placement="top"
+                      title="text color"></i>
+                    <div class="fore-palette">
+                    </div>
+                  </div>
+                  <div class="back-wrapper"><i class='fa fa-font' data-toggle="tooltip" data-placement="top"
+                      title="Background color"></i>
+                    <div class="back-palette">
+                    </div>
+                  </div>
+                  <a href="#" data-command='bold' data-toggle="tooltip" data-placement="top" title="Bold"><i
+                      class='fa fa-bold'></i></a>
+                  <a href="#" data-command='italic' data-toggle="tooltip" data-placement="top" title="Italic"><i
+                      class='fa fa-italic'></i></a>
+                  <a href="#" data-command='underline' data-toggle="tooltip" data-placement="top" title="Underline"><i
+                      class='fa fa-underline'></i></a>
+                  <a href="#" data-command='strikeThrough' data-toggle="tooltip" data-placement="top" title="Stike through"><i
+                      class='fa fa-strikethrough'></i></a>
+                  <a href="#" data-command='justifyLeft' data-toggle="tooltip" data-placement="top" title="Left align"><i
+                      class='fa fa-align-left'></i></a>
+                  <a href="#" data-command='justifyCenter'><i class='fa fa-align-center' data-toggle="tooltip"
+                      data-placement="top" title="Center align"></i></a>
+                  <a href="#" data-command='justifyRight' data-toggle="tooltip" data-placement="top" title="Right align"><i
+                      class='fa fa-align-right'></i></a>
+                  <a href="#" data-command='justifyFull' data-toggle="tooltip" data-placement="top" title="Justify"><i
+                      class='fa fa-align-justify'></i></a>
+                  <a href="#" data-command='indent' data-toggle="tooltip" data-placement="top" title="Indent"><i
+                      class='fa fa-indent'></i></a>
+                  <a href="#" data-command='outdent' data-toggle="tooltip" data-placement="top" title="Outdent"><i
+                      class='fa fa-outdent'></i></a>
+                  <a href="#" data-command='insertUnorderedList' data-toggle="tooltip" data-placement="top"
+                    title="Unordered list"><i class='fa fa-list-ul'></i></a>
+                  <a href="#" data-command='insertOrderedList' data-toggle="tooltip" data-placement="top"
+                    title="Ordered list"><i class='fa fa-list-ol'></i></a>
+                  <a href="#" data-command='h1' data-toggle="tooltip" data-placement="top" title="H1">H1</a>
+                  <a href="#" data-command='h2' data-toggle="tooltip" data-placement="top" title="H2">H2</a>
+                  <a href="#" data-command='createlink' data-toggle="tooltip" data-placement="top" title="Insert link"><i
+                      class='fa fa-link'></i></a>
+                  <a href="#" data-command='unlink' data-toggle="tooltip" data-placement="top" title="Unlink"><i
+                      class='fa fa-unlink'></i></a>
+                  <a href="#" data-command='insertimage' data-toggle="tooltip" data-placement="top" title="Insert image"><i
+                      class='fa fa-image'></i></a>
+                  <a href="#" data-command='p' data-toggle="tooltip" data-placement="top" title="Paragraph">P</a>
+                  <a href="#" data-command='subscript' data-toggle="tooltip" data-placement="top" title="Subscript"><i
+                      class='fa fa-subscript'></i></a>
+                  <a href="#" data-command='superscript' data-toggle="tooltip" data-placement="top" title="Superscript"><i
+                      class='fa fa-superscript'></i></a>
+                </div>
+                <!--enter data in this page for editing-->
+                <div id='editor' class="editorAria" contenteditable>
+                  {{post_data.body}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="getHTML" type="button" get-data="editor-1" class="btn btn-primary" style="width: 100%;">Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

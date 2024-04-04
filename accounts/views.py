@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth import get_user_model
-from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login,logout
 from django.http import JsonResponse
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -82,6 +83,11 @@ def signinpage(request):
         else:
             print("test1")
             return redirect("/err")
+
+@login_required(login_url="/accounts/signin",redirect_field_name=None)
+def logoutsite(request):
+    logout(request)
+    return redirect("/")
 
 def remainingurl(response):
     return HttpResponse("<h1>page getting ready")

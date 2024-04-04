@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: linear-gradient(to right, pink, blueviolet);
+    padding: 1.5rem 0;
+}
+
+.modal-body > form > div > input,
+.modal-body > form > div > textarea,
+.modal-body > form > div > select{
+    padding: 0.5rem;
+    margin-bottom: 0.75rem;
+    border: 1px transparent;
+    border-bottom: 2.5px solid #533bdb;
+    border-right: 2.5px solid #533bdb;
+    border-radius: 6px;
+    box-shadow: #533bdb 1.5px 1.5px 3.5px;
+    text-align: justify;
+    outline: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    width: 62%;
+}

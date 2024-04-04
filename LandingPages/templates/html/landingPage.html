@@ -7,76 +7,131 @@
                 <div class="blog">
 
                     <h2 class="h2">Tags</h2>
-                    <div id="tags">
-                      {% for i in community_tags %}
-                        <input type="button" title={{i.description}} value="{{i.name}}">
-                      {% endfor %}
-                      <!--tags here-->
-                      </div>
                     <div class="dropdown-profile">
-                      <button id="tagcreate" class="btn btn-primary" style="display:block;color:green;">
+                      {% if designation == "OWNER" or designation == "ADMIN" %}
+                      <button id="tagcreate" class="btn btn-primary" style="display:block;color:green; min-width: 0; padding: 1.5rem 0 0.65rem 0;">
                         New Tag
                       </button>
-                      <div id="tagadd" class="menu">
+                      <div class="modal" tabindex="-1" id="myModal">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">New Tag</h5>
+                            </div>
+                        <input id="token" type="hidden" value="{{csrf_token}}">
+                            <div class="modal-body">
+                              <form action="">
+                                <input type="text" id="Tagname" name="" placeholder="Enter tag name">
+                                <textarea id="Tagdescription" placeholder="Enter a small description" class="tag-descrp"></textarea>
+                              </form>
+                            </div>
+                            <div class="modal-footer flex flex-end">
+                                <input type="button" class="btn-primary btn-start" data-bs-dismiss="modal" value="Close" id="close-btn">
+                                <input type="submit" class="btn-primary" value="Create Tag" id="addTagbtn">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endif %}
+                      <div id="tags">
+                        {% for i in community_tags %}
+                          <input type="button" title={{i.description}} value="{{i.name}}" class="tagss">
+                        {% endfor %}
+                        <!--tags here-->
+                        </div>
+                      <!--div id="tagadd" class="menu">
                         <div id="errorMessage" style="display: none; color: red;"></div>
                         <input id="token" type="hidden" value="{{csrf_token}}">
                         <input type="text" id="Tagname" placeholder="Enter tag name">
                         <input type="text" id="Tagdescription" placeholder="Enter a small description">
                         <button id="addTagbtn">Save</button>
-                      </div>
+                      </div-->
                       <script type="module" src="{% static 'axios/dist/axios.js' %}"></script>
                       <script src="{% static 'javascript/communitylanding.js' %}"></script>
                     </div>
-                    <div class="blog-card-group" id="posts">
+                    <section id="posts-list">
+                      <h2 class="section-heading">Posts</h2>
                       {% for post in posts %}
-                      <div class="blog-card">
-          
-                        <div class="blog-card-banner">
+                      <!--div class="card" onclick="window.location='/@post/view/{{post.uuid}}'">
+                        
+                        <div class="card-header flex flex-center">
+                          <div class="card-img">
                           <img src="./assets/images/blog-1.png" alt="Building microservices with Dropwizard, MongoDB & Docker"
-                            width="250" class="blog-banner-img">
+                            width="250">
+                          </div>
+          
+                          <div class="card-text">
+            
+                            <!--button class="blog-topic text-tiny">{{post.tag}}</button>
+                            <div class="text-heading">
+                              <h4>{{post.title}}</h4>
+                            </div>
+                            <div class="text-body">
+                              <p>{{post.description}}</p>
+                            </div>
+                          </div>
                         </div>
+                          <!--div class="wrapper-flex"-->
           
-                        <div class="blog-content-wrapper">
-          
-                          <button class="blog-topic text-tiny">{{post.tag}}</button>
-          
-                          <h3>
-                            <a   onclick="window.location='/home/{{post.uuid}}" class="h3">
-                              {{post.title}}
-                            </a>
-                          </h3>
-          
-                          <p class="blog-text">
-                            {{post.description}}
-                          </p>
-          
-                          <div class="wrapper-flex">
-          
-                            <div class="profile-wrapper">
+                            <!--div class="profile-wrapper">
                               <img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50">
                             </div>
           
-                            <div class="wrapper">
-                              <a href="#" class="h4">{{post.User.username}}</a>
+                            <div class="card-footer flex flex-between">
+
+                              <!--a href="#" class="h4">{{post.User.username}}</a>
           
-                              <p class="text-sm">
-                                <time datetime="2022-01-17">{{post.dateofpost}}</time>
-                                <span class="separator"></span>
+                              <div class="card-actions">
+                                <div class="date-time">{{post.dateofpost}}</div>
+                                <!--span class="separator"></span>
                                 <ion-icon name="time-outline"></ion-icon>
-                              </p>
+                              </div>
                             </div>
           
+                          <!/div>
+          
+                        </div-->
+                        <div class="card">
+                          <div class="card-header flex flex-center">
+                            <div class="card-img">
+                              <img src="{{post.banner}}" alt="">
+                            </div>
+                            <div class="card-text" width="250">
+                              <div class="text-heading" onclick="window.location='/@post/view/{{post.uuid}}'">
+                                <h4>{{post.title}}</h4>
+                              </div>
+                              <div class="text-body">
+                                <p>{{post.description}}</p>
+                              </div>
+                            </div>
                           </div>
-          
-                        </div>
-                        {% if user.username == post.User.username %}
-                        <!---->
-                        <a>delete menu</a>
-                          </span>
+                          <div class="card-footer flex flex-between">
+                            <div class="card-actions">
+                              <div class="date-time">
+                                <p></p>{{post.dateofpost}}</div>
+                            </div>
+                                <img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50">
+                              </div>
+                              <div>
+                                <a href="#" style="color:black">{{post.User.username}}</a>
+                              </div>
+                            {% if user.username == post.User.username or designation == "OWNER" or designation == "ADMIN" %}
+                            <div class="action-buttons">
+                              <input type="button" onclick="window.location='/@post/delete/{{post.uuid}}'" value="Delete Post" class="act-btn">
+                              <input type="button" onclick="window.location='/@post/edit/{{post.uuid}}'" value="Edit Post" class="act-btn">
+                            </div>
+                            {% elif designation == "OWNER" or designation == "ADMIN" or designation == "MOD" %}
+                            <div class="action-buttons">
+                              <input type="button" value="Delete Post" class="act-btn">
+                              <input type="button" value="Edit Post" class="act-btn">
+                              <input type="button" value="approve" class="act-btn">
+                            </div>
                         {% endif %}
-          
+                          </div>
+                        </div>
                       </div>
                       {% endfor %}
+                    </section>
             </section>
         </main>
 

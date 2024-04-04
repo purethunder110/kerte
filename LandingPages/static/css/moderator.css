@@ -1,0 +1,185 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+@font-face{
+    font-family: 'Raleway-Regular';
+    src: url('../fonts/Raleway-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Raleway-Medium';
+    src: url('../fonts/Raleway-Medium.ttf');
+}
+
+@font-face{
+    font-family: 'Raleway-Bold';
+    src: url('../fonts/Raleway-Bold.ttf');
+}
+
+@font-face{
+    font-family: 'Raleway-SemiBold';
+    src: url('../fonts/Raleway-SemiBold.ttf');
+}
+
+@font-face{
+    font-family: 'Raleway-Black';
+    src: url('../fonts/Raleway-Black.ttf');
+}
+
+/* colors */
+
+:root{
+    --primary: #eebf00;
+    --secondary: #232b38;
+    --ternery: #6c6c6c;
+    --error: #fe4545;
+    --pure: #fefefe;
+    --light: #f0f0f0;
+    --heaven: #ffffff;
+    --footer: #2d333f;
+}
+
+.container{
+    width: 100%;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+@media(min-width:1360px){
+    .container{
+        max-width: 1082px;
+    }
+}
+
+header.topbar{
+    background-color: var(--secondary);
+    color: var(--pure);
+    font-family: 'Raleway-Medium';
+    padding: 0.75rem 0;
+    height: 2.5;
+}
+
+/* a of auth div of header having class topbar */
+header.topbar .auth > div a,
+header.topbar .logo > a{
+    color: var(--pure);
+    text-decoration: none;
+}
+
+.logo h2{
+    font-family: 'Caveat', cursive;
+}
+
+
+.flex{
+    display: flex;
+}
+
+.flex-center{
+    justify-content: center;
+    align-items: center;
+}
+
+.justify-end{
+    justify-content: flex-end;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.items-center{
+    align-items: center;
+}
+
+header.topbar .auth .divider{
+    margin: 0 0.5rem;
+}
+
+header.topbar .auth a{
+    margin: 0 0.2rem;
+}
+
+.logo>a{
+    text-decoration: none;
+}
+
+#users-list{
+    padding: 3rem 8rem;
+}
+
+form{
+    max-width: fit-content;
+}
+
+.form-top{
+    min-width: 41rem; 
+}
+
+.card-header,
+.card-header:first-child{
+    background-color: #e1e1dd;
+}
+
+#grid-class{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 0.5rem;
+}
+
+#grid-class p{
+    margin: auto;
+    min-width: 8rem;
+}
+
+@media(max-width:945px){
+    #users-list{
+        padding: 3rem 6rem;
+    }
+}
+
+@media(max-width:840px){
+    #users-list{
+        padding: 3rem 5rem;
+    }
+}
+
+@media(max-width:780px){
+    #users-list{
+        padding: 3rem 3rem;
+    }
+}
+
+@media(max-width:740px){
+    #users-list{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .form-top{
+        flex-direction: column;
+        padding: 0 3rem 0 0;
+    }
+    .card{
+        margin-top: 1.5rem;
+    }
+    form{
+        max-width: 23rem;
+    }
+    .form-top{
+        min-width: fit-content;
+    }
+}
+
+@media(max-width:740px){
+    form{
+        max-width: 20rem;
+    }
+}

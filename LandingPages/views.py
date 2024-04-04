@@ -27,15 +27,13 @@ def Homepage(request):
 
 #@login_required(login_url="/login")
 def NewPostPage(request,communityid):
-    community_sidebar=community_user_group.objects.filter(user=request.user)
     community_object=Community.objects.get(uuid=communityid)
     all_tags=tags.objects.filter(Community=community_object)
     data={
-        "community_sidebar":community_sidebar,
         "Tags":all_tags,
     }
     if request.method=="GET":
-        return render(request,"html/post.html",data)
+        return render(request,"post.html",data)
     if request.method=="POST":
         heading=request.POST.get("heading")
         description=request.POST.get("description")
@@ -93,24 +91,62 @@ def UpdateCommunity(request,communityid):
         }
     return render(request,'create_community.html',content)
 
-def joinCommunity(response,uuid):
-    return JsonResponse({
-        'success':"successfully added to community"
-    },status=200)
+@login_required(login_url="/accounts/signin",redirect_field_name=None)
+def joinCommunity(response,communityid):
+    community=Community.objects.get(uuid=communityid)
+    new_join=community_user_group(community=community,user=response.user,designation="USER")
+    new_join.save()
+    return redirect("/@community/"+str(communityid))
+
+def leaveCommunity(response,communityid):
+    community_object=Community.objects.get(uuid=communityid)
+    join_instance=community_user_group.objects.filter(user=response.user,community=communityid)
+    join_instance.delete()
+    return redirect("/@community/"+str(communityid))
+
+def ViewPostPage(request,postid):
+    post_data=NewPost.objects.get(uuid=postid)
+    community_sidebar=community_user_group.objects.filter(user=request.user)
+    data={
+        'community_sidebar':community_sidebar,
+        "post_data":post_data,
+    }
+    return render(request,"html/single-post.html",data)
+
+def editpost(request,postid):
+    post_data=NewPost.objects.get(uuid=postid)
+    all_tags=tags.objects.filter(Community=post_data.Community)
+    data={
+        "Tags":all_tags,
+        "post_data":post_data,
+    }
+    if request.method=="GET":
+        return render(request,"post.html",data)
 
 
-@login_required(login_url="/accounts/login",redirect_field_name=None)
+
+
+def DeletePost(response,postid):
+    post_object=NewPost.objects.get(uuid=postid)
+    post_object.delete()
+    return redirect("/home/")
+
+@login_required(login_url="/accounts/signin",redirect_field_name=None)
 def ViewCommunity(request,communityid):
     community_sidebar=community_user_group.objects.filter(user=request.user)
     community_object=Community.objects.get(uuid=communityid)
-    current_community_role=community_user_group.objects.get(community=community_object)
-    All_posts=NewPost.objects.filter(Community=community_object)
+    try:
+        current_community_role=community_user_group.objects.get(community=community_object,user=request.user)
+        designation=current_community_role.designation
+    except:
+        designation="New"
+    All_posts=NewPost.objects.filter(Community=community_object).order_by('-dateofpost')
     paginator=Paginator(All_posts,15)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     community_Tags=tags.objects.filter(Community=community_object)
     data={
-        'designation':current_community_role.designation,
+        'designation':designation,
         'community_sidebar':community_sidebar,
         'community_tags':community_Tags,
         'channel_name':community_object.name,
@@ -127,6 +163,33 @@ def ViewCommunity(request,communityid):
         newTag=tags(Community=community_object,name=tagname,description=tagdiscription)
         newTag.save()
         return render(request,"html/landingPage.html",data)
+
+
+def modmanage(request,communityid):
+    community_sidebar=community_user_group.objects.filter(user=request.user)
+    community_object=Community.objects.get(uuid=communityid)
+    current_community_role=community_user_group.objects.get(community=community_object,user=request.user)
+    designation=current_community_role.designation
+    community_user_list=community_user_group.objects.filter(community=community_object)
+    data={
+        'designation':designation,
+        'community_sidebar':community_sidebar,
+        'channel_name':"Manage Mod",
+        'channel_id':community_object.uuid,
+        'community_list':community_user_list,
+    }
+    if request.method=="GET":
+        return render(request,"html/moderator.html",data)
+    if request.method=="POST":
+        user_uuid=request.POST.get("user_uuid")
+        user_object=get_user_model()
+        user_change_designation=user_object.objects.get(uuid=user_uuid)
+        role_set=request.POST.get("role")
+        if designation=="OWNER" or designation=="ADMIN":
+            change_role=community_user_group.objects.get(community=community_object,user=user_change_designation)
+            change_role.designation=role_set
+            change_role.save()
+        return render(request,"html/moderator.html",data)
 
 def landingPage(request):
     return render(request,"html/Homepage.html")
