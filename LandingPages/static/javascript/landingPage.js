@@ -24,3 +24,10 @@ function colorLink(){
 }
 
 linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+function searchCommunity(search){
+    if (event.key === "Enter"){
+        //alert(search.value)
+        window.location="/@community/search/"+search.value+""
+    }
+}

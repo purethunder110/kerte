@@ -26,7 +26,7 @@ form.onsubmit = (e) => {
             eField.classList.remove("valid");
             let errorTxt = eField.querySelector(".error-txt");
 
-            (eInput.value != "") ? errorTxt.innerText = "Enter a valid email address": errorTxt.innerText = "Email can't be blank";
+            (eInput.value != "") ? errorTxt.innerText = "Enter a valid Username": errorTxt.innerText = "Email can't be blank";
         } else {
             eField.classList.remove("error");
             eField.classList.add("valid");

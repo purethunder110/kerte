@@ -1,0 +1,17 @@
+{% extends "mainBase.html" %}
+{% block content %}
+{% load static %}
+<input id="searchterm" type="hidden" value="{{search}}">
+<script src="{% static 'axios/dist/axios.js' %}"></script>
+<section id="articles">
+  <h4 class="section-title">Search Results</h4>
+  <div class="section-body">
+      <div id="articles-list">
+          <script src="{% static 'javascript/search.js' %}"></script>
+      </div>
+  </div>
+  <div id="load"></div>
+  <a id="loadmore"></a>
+</section>
+
+{% endblock content %}

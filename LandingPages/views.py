@@ -12,7 +12,7 @@ def Homepage(request):
     #All_user_joined_community=community_user_group.objects.filter(user=request.user)
     community_sidebar=community_user_group.objects.filter(user=request.user)
     All_posts=NewPost.objects.filter(User=request.user)
-    paginator=Paginator(All_posts,15)
+    paginator=Paginator(All_posts,12)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     data={
@@ -23,6 +23,27 @@ def Homepage(request):
         'next_page_number':page_obj.next_page_number() if page_obj.has_next() else None
     }
     return render(request,"html/profilepage.html",data)
+
+def loadProfileData(response):
+    posts=NewPost.objects.filter(User=response.user)
+    paginator=Paginator(posts,5)
+    page_number=response.GET.get('page')
+    print(page_number)
+    page_obj=paginator.get_page(page_number)
+    data = {
+        'posts': list({
+            'title':post.title,
+            'postid':post.uuid,
+            'description':post.description,
+            'Community_name':post.Community.name,
+            'Community_id':post.Community.uuid,
+            'date':post.dateofpost,
+        }for post in page_obj),
+        'has_next': page_obj.has_next(),
+        'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None
+    }
+    return JsonResponse(data)
+
 
 
 #@login_required(login_url="/login")
@@ -82,6 +103,36 @@ def NewCommunity(request):
             #return render(request,"community.html",content)
 
 
+def searchpage(response,search):
+    community_sidebar=community_user_group.objects.filter(user=response.user)
+    data={
+        'search':search,
+        'channel_name':"Search Term:"+search,
+        'community_sidebar':community_sidebar,
+    }
+    return render(response,"html/searchpage.html",data)
+
+def SearchCommunity(request,search):
+    Communitys=Community.objects.filter(name__icontains=search)
+    for i in Communitys:
+        print(i.name)
+    print("finish")
+    paginator=Paginator(Communitys,10)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+    data = {
+        'Community': list({
+            'title':Community.name,
+            'Communityid':Community.uuid,
+            'description':Community.description,
+        }for Community in page_obj),
+        'has_next': page_obj.has_next(),
+        'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None
+    }
+    print(data)
+    return JsonResponse(data)
+
+
 def UpdateCommunity(request,communityid):
     community_object=Community.objects.get(uuid=communityid)
     name=community_object.name
@@ -122,6 +173,14 @@ def editpost(request,postid):
     }
     if request.method=="GET":
         return render(request,"post.html",data)
+    if request.method=="POST":
+        heading=request.POST.get("heading")
+        description=request.POST.get("description")
+        body_post=request.POST.get("data")
+        post_data.title=heading
+        post_data.description=description
+        post_data.data
+        return redirect("/@post/view/"+str(post_data.uuid))
 
 
 
@@ -163,6 +222,7 @@ def ViewCommunity(request,communityid):
         newTag=tags(Community=community_object,name=tagname,description=tagdiscription)
         newTag.save()
         return render(request,"html/landingPage.html",data)
+
 
 
 def modmanage(request,communityid):

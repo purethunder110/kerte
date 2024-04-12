@@ -1,19 +1,69 @@
 {% extends "mainBase.html" %}
 {% block content %}
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body text-center">
-          <img src="profile-picture.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Picture" style="width: 150px;">
-          <h5 class="card-title">Username</h5>
-          <p class="card-text">A simple bio.</p>
-          <a href="#" class="btn btn-primary">Edit Profile</a>
-        </div>
+{% load static %}
+<section id="intro">
+  <div class="intro-block">
+      <img src="images/profite_img.svg" alt="Logo" width="120" height="140" class="d-inline-block align-text-top" style="margin-bottom: 0.5rem;">
+      <script src="{% static 'axios/dist/axios.js' %}"></script>
+      <h4>Hello, I'm {{request.user.username}}</h4>
+      <div class="profile-buttons">
+          <!-- <a href="#" class="btn btn-outline-primary btn-sm">Download CV</a>>
+          <a href="#bottom" class="btn btn-outline-primary btn-sm">Contact with me</a-->
       </div>
-    </div>
   </div>
-</div>
+</section>
 
+<section id="about">
+  <!--h4 class="section-title">About Me</h4>
+  <div class="section-body" id="about-block">
+      <div id="about-photo">
+          <img src="images/profite_img.svg" alt="" srcset="" width="120" height="140">
+      </div>
+      <div style="text-align: justify; font-size: 14px;">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit quasi eos,
+          assumenda, laboriosam hic quis sed consequatur obcaecati possimus dicta, maxime atque suscipit 
+          veritatis facere ipsam mollitia voluptates soluta dolores eligendi aliquid reprehenderit quod 
+          quibusdam excepturi! Dolores quia molestiae deserunt inventore sequi, sapiente sunt obcaecati 
+          quam corrupti debitis ut illo. Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Corrupti,impedit accusantium facere ut sed harum natus magnam reprehenderit ea fuga nisi qui 
+          quidem autem. Quia? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit quasi eos,
+          assumenda, laboriosam hic quis sed consequatur obcaecati possimus dicta, maxime atque suscipit 
+          veritatis facere ipsam mollitia voluptates soluta dolores eligendi aliquid reprehenderit quod 
+          quibusdam excepturi! Dolores quia molestiae deserunt inventore sequi, sapiente sunt obcaecati 
+          quam corrupti debitis ut illo.
+      </div>
+  </div-->
+</section>
+
+<section id="articles">
+  <h4 class="section-title">Posts</h4>
+  <div class="section-body">
+      <div id="articles-list">
+        <!--
+          {% for post in posts  %}
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">{{post.title}}</h5>
+                  <h5 class="card-title">
+                    <a href="/@community/{{post.Community.uuid}}">{{post.Community.name}}</a>
+                  </h5>
+                  <p class="publish-date">{{post.dateofpost}} </p>
+                  <p class="card-text">{{post.description}}
+                      <span class="read-more">
+                          <a href="/@post/view/{{post.uuid}}">
+                              View Post
+                          </a>
+                      </span>
+                  </p>
+              </div>
+          </div>
+          {% endfor %}
+        -->
+          <script src="{% static 'javascript/profile.js' %}"></script>
+      </div>
+  </div>
+  <div id="load"></div>
+  <a id="loadmore"></a>
+</section>
 
 {% endblock content %}

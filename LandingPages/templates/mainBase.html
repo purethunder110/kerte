@@ -57,7 +57,7 @@
                 {% endif %}
                 </div>
                 <div class="header__search" style="width:450px">
-                    <input type="search" placeholder="Search" class="header__input">
+                    <input id="searchbar"  type="search" placeholder="Search New Community" class="header__input" onkeydown="searchCommunity(this)">
                     <i class='bx bx-search header__icon'></i>
                 </div>
     
@@ -76,7 +76,7 @@
                                 <img src="images/user.png" alt="" srcset="">
                             </i>
                             <h4>Profile</h4>
-                        </a> -->
+                        </a>
                         <a href="#" class="nav__dropdown-item">
                             <i class='bx bx-user nav__icon'>
                                 <img src="images/lock.png" alt="" srcset="">
@@ -88,7 +88,7 @@
                                 <img src="images/mail.png" alt="" srcset="">
                             </i>
                             <h4>Mail</h4>
-                        </a> 
+                        </a--> 
                         <a href="/home/" class="nav__dropdown-item">
                             <i class='bx bx-user nav__icon'>
                                 <img src="images/contact-round.png" alt="" srcset="">
@@ -130,9 +130,9 @@
                     {% endfor %}
                 </div>
 
-                <a href="/accounts/logout" class="nav__link nav__logout">
-                    <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Log Out</span>
+                <a href="/" class="nav__link nav__logout">
+                    <!--i class='bx bx-log-out nav__icon' ></i-->
+                    <span class="nav__name">Kerte</span>
                 </a>
             </nav>
         </div>
