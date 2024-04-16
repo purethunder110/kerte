@@ -41,20 +41,6 @@ function loadData(){
         parentElement=document.getElementById("articles-list")
         if (has_next){
             data.posts.forEach(post=>{
-                /*
-                card=document.createElement('div')
-                card.className="card"
-                body=document.createElement('div')
-                body.className="card-body"
-                title=document.createElement('h4')
-                for (let i in x){
-                    console.log(i)
-                }
-                title.textContent=x.title
-                
-                card.append(body)
-                parentElement.append(card)
-                body.append(title)*/
                 // Create card container
                 const card = document.createElement('div');
                 card.className = "card";

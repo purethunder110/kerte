@@ -33,6 +33,7 @@ SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
 
 STATIC_ROOT="STATICFILES"
+MEDIA_ROOT="MEDIAFILES"
 
 ALLOWED_HOSTS = ['127.0.0.1','.vercel.app','*']
 
@@ -40,8 +41,8 @@ ALLOWED_HOSTS = ['127.0.0.1','.vercel.app','*']
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli.dashboard',
-    'grappelli',
+    #'grappelli.dashboard',
+    #'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -177,7 +178,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 
 # Default primary key field type

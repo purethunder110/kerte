@@ -2,11 +2,16 @@
 {% load static %}
 {% block content %}
 
+<style>
+  hiddenpost{
+    display:none;
+  }
+</style>
         <main>
             <section>
                 <div class="blog">
-
-                    <h2 class="h2">Tags</h2>
+                  <input type="hidden" id="communityid" value="{{channel_id}}"/>
+                    <!--h2 class="h2">Tags</!--h2-->
                     <div class="dropdown-profile">
                       {% if designation == "OWNER" or designation == "ADMIN" %}
                       <button id="tagcreate" class="btn btn-primary" style="display:block;color:green; min-width: 0; padding: 1.5rem 0 0.65rem 0;">
@@ -34,69 +39,33 @@
                       </div>
                       {% endif %}
                       <div id="tags">
+                        <!--input value="Delete Tag" type="button" class="tagss" onclick="deletetag()"-->
+                        <input value="Clear Filter" type="button" class="tagss" onclick="cleartag()">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
                         {% for i in community_tags %}
-                          <input type="button" title={{i.description}} value="{{i.name}}" class="tagss">
+                          <input data-toggle="true" type="button" title={{i.description}} value="{{i.name}}" class="tagss" onclick="toggleTag(this)">
                         {% endfor %}
                         <!--tags here-->
-                        </div>
-                      <!--div id="tagadd" class="menu">
-                        <div id="errorMessage" style="display: none; color: red;"></div>
-                        <input id="token" type="hidden" value="{{csrf_token}}">
-                        <input type="text" id="Tagname" placeholder="Enter tag name">
-                        <input type="text" id="Tagdescription" placeholder="Enter a small description">
-                        <button id="addTagbtn">Save</button>
-                      </div-->
+                      </div>
                       <script type="module" src="{% static 'axios/dist/axios.js' %}"></script>
                       <script src="{% static 'javascript/communitylanding.js' %}"></script>
-                    </div>
+                      </div>
+                  </div>
+                  
+                    <h2 class="section-heading" id="post-div">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 32H64C46.3 32 32 46.3 32 64v64c0 17.7 14.3 32 32 32H441.4c4.2 0 8.3-1.7 11.3-4.7l48-48c6.2-6.2 6.2-16.4 0-22.6l-48-48c-3-3-7.1-4.7-11.3-4.7H288c0-17.7-14.3-32-32-32s-32 14.3-32 32zM480 256c0-17.7-14.3-32-32-32H288V192H224v32H70.6c-4.2 0-8.3 1.7-11.3 4.7l-48 48c-6.2 6.2-6.2 16.4 0 22.6l48 48c3 3 7.1 4.7 11.3 4.7H448c17.7 0 32-14.3 32-32V256zM288 480V384H224v96c0 17.7 14.3 32 32 32s32-14.3 32-32z"/></svg>
+                      Posts
+                    </h2>
                     <section id="posts-list">
-                      <h2 class="section-heading">Posts</h2>
                       {% for post in posts %}
-                      <!--div class="card" onclick="window.location='/@post/view/{{post.uuid}}'">
-                        
-                        <div class="card-header flex flex-center">
-                          <div class="card-img">
-                          <img src="./assets/images/blog-1.png" alt="Building microservices with Dropwizard, MongoDB & Docker"
-                            width="250">
-                          </div>
-          
-                          <div class="card-text">
-            
-                            <!--button class="blog-topic text-tiny">{{post.tag}}</button>
-                            <div class="text-heading">
-                              <h4>{{post.title}}</h4>
-                            </div>
-                            <div class="text-body">
-                              <p>{{post.description}}</p>
-                            </div>
-                          </div>
-                        </div>
-                          <!--div class="wrapper-flex"-->
-          
-                            <!--div class="profile-wrapper">
-                              <img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50">
-                            </div>
-          
-                            <div class="card-footer flex flex-between">
-
-                              <!--a href="#" class="h4">{{post.User.username}}</a>
-          
-                              <div class="card-actions">
-                                <div class="date-time">{{post.dateofpost}}</div>
-                                <!--span class="separator"></span>
-                                <ion-icon name="time-outline"></ion-icon>
-                              </div>
-                            </div>
-          
-                          <!/div>
-          
-                        </div-->
-                        <div class="card">
+                        <div class="card" data-tag="{{post.tags.name}}" style="">
                           <div class="card-header flex flex-center">
                             <div class="card-img">
-                              <img src="{{post.banner}}" alt="">
+                              <!--img src="{{post.banner}}" alt=""-->
+                              <!--img  src="/media/post_img.jpg" alt=""-->
+                              <img src="/media/kerte-banner.png" alt="">
                             </div>
-                            <div class="card-text" width="250">
+                            <div class="card-text">
                               <div class="text-heading" onclick="window.location='/@post/view/{{post.uuid}}'">
                                 <h4>{{post.title}}</h4>
                               </div>
@@ -108,9 +77,9 @@
                           <div class="card-footer flex flex-between">
                             <div class="card-actions">
                               <div class="date-time">
-                                <p></p>{{post.dateofpost}}</div>
+                                {{post.dateofpost}}</div>
                             </div>
-                                <img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50">
+                                <!--img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50"-->                              
                               </div>
                               <div>
                                 <a href="#" style="color:black">{{post.User.username}}</a>
@@ -129,9 +98,10 @@
                         {% endif %}
                           </div>
                         </div>
-                      </div>
                       {% endfor %}
                     </section>
+                    <div id="load"></div>
+                    <a id="loadmore"></a>
             </section>
         </main>
 

@@ -59,5 +59,6 @@
   }
 /* tag selected color*/
   .btn-tag-selected {
-    background-color: red !important;
+    background-color: #3e2093 !important;
+    color:aliceblue !important;
   }

@@ -20,10 +20,12 @@ from django.urls import path,include
 #views
 from service.views import *
 #urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     #new admin sign urls
-    path('grappelli/',include('grappelli.urls')),
+    #path('grappelli/',include('grappelli.urls')),
 
     path('',include('pwa.urls')),
     #pwa config end
@@ -32,4 +34,4 @@ urlpatterns = [
     path('contact/',contactUs,name="contact"),
     path('accounts/',include('accounts.urls')),
     path('',include('LandingPages.urls')),
-]
+]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

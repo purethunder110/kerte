@@ -102,6 +102,26 @@ def NewCommunity(request):
                 },status=406)
             #return render(request,"community.html",content)
 
+def communityPosts(response,communityid):
+    commun=Community.objects.get(uuid=communityid)
+    posts=NewPost.objects.filter(Community=commun)
+    paginator=Paginator(posts,5)
+    page_number=response.GET.get('page')
+    print(page_number)
+    page_obj=paginator.get_page(page_number)
+    data = {
+        'posts': list({
+            'title':post.title,
+            'postid':post.uuid,
+            'postuser':post.User.username,
+            'description':post.description,
+            'Community_id':post.Community.uuid,
+            'date':post.dateofpost,
+        }for post in page_obj),
+        'has_next': page_obj.has_next(),
+        'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None
+    }
+    return JsonResponse(data)
 
 def searchpage(response,search):
     community_sidebar=community_user_group.objects.filter(user=response.user)
@@ -179,7 +199,9 @@ def editpost(request,postid):
         body_post=request.POST.get("data")
         post_data.title=heading
         post_data.description=description
-        post_data.data
+        print(body_post)
+        post_data.body=body_post
+        post_data.save()
         return redirect("/@post/view/"+str(post_data.uuid))
 
 
@@ -200,7 +222,7 @@ def ViewCommunity(request,communityid):
     except:
         designation="New"
     All_posts=NewPost.objects.filter(Community=community_object).order_by('-dateofpost')
-    paginator=Paginator(All_posts,15)
+    paginator=Paginator(All_posts,20)
     page_number=request.GET.get('page')
     page_obj=paginator.get_page(page_number)
     community_Tags=tags.objects.filter(Community=community_object)

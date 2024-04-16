@@ -30,9 +30,9 @@
     font-family: ui-sans-serif;
     font-size: 15px;
     border-radius: 5px;
-    color: #dc3545;
+    color: #3e2093;
     background-color: #ffffff;
-    border: 1px solid #dc3545;
+    border: 1px solid #3e2093;
     cursor: pointer;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .tagss:hover{
-    background-color: #dc3545;
+    background-color: #3e2093;
     color: #ffffff;
 }
 
@@ -83,9 +83,11 @@
 }
 
 .card-img{
-    width: 22rem;
-    height: 8rem;
+    width: 15rem;
+    height: 10rem;
     padding: 0.5rem 0.5rem 0.5rem 0;
+    margin-right: auto;
+    margin-left: 0rem;
 }
 
 .act-btn{

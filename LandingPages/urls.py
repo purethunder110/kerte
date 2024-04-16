@@ -16,5 +16,6 @@ urlpatterns=[
     path('@community/search/<str:search>/',searchpage),
     path('@community/search/api/<str:search>/',SearchCommunity),
     path('@community/<uuid:communityid>',ViewCommunity),
+    path('@community/api/<uuid:communityid>/',communityPosts),
     path('@community/perms/<uuid:communityid>',modmanage),
 ]
