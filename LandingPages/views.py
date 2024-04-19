@@ -232,6 +232,7 @@ def ViewCommunity(request,communityid):
         'community_tags':community_Tags,
         'channel_name':community_object.name,
         'channel_id':community_object.uuid,
+        'channel_description':community_object.description,
         'posts':list(page_obj),
         'has_next':page_obj.has_next(),
         'next_page_number':page_obj.next_page_number() if page_obj.has_next() else None

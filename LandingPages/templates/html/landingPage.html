@@ -1,12 +1,19 @@
 {% extends "mainBase.html" %}
 {% load static %}
 {% block content %}
-
-<style>
-  hiddenpost{
-    display:none;
-  }
-</style>
+<link rel="stylesheet" href="{% static "css/ineractiveui.css" %}">
+<div class="community-banner">
+  <div class="community-name">
+    <p>{{channel_name}}</p>
+  </div>
+  <div class="community-description">
+    {{channel_description}}
+  </div>
+  <div class="community-button">
+    <button class="button-community" style="margin-left:12px;">Join</button>
+    <button class="button-community" style="margin-left:12px;">leave</button>
+  </div>
+</div>
         <main>
             <section>
                 <div class="blog">
@@ -38,6 +45,44 @@
                         </div>
                       </div>
                       {% endif %}
+
+
+                      <!--new tag filter drop down
+                      <div-- class="filter-button">
+                        <div class="filter-menu">
+                          <div >
+                            <div class="filter-items">test</div>
+                            <div class="filter-items">teat2</div>
+                          </div>
+                        </div>
+                      </div-->
+                      <div class="filter">
+                        <div>Hover Me</div>
+                        <div class="filter-menu">
+                          <div class="filter-item">Item 1</div>
+                          <div class="filter-item">Item 2</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <div class="filter-item">Item 3</div>
+                          <!-- Add more items dynamically if needed -->
+                        </div>
+                      </div>
+                      
+
+
+
+
+
+
+                      <!--end drop down-->
+
+
                       <div id="tags">
                         <!--input value="Delete Tag" type="button" class="tagss" onclick="deletetag()"-->
                         <input value="Clear Filter" type="button" class="tagss" onclick="cleartag()">
