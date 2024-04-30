@@ -2,18 +2,39 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static "css/ineractiveui.css" %}">
-<div class="community-banner">
-  <div class="community-name">
+<div class="community-banner profile-banner" style="min-width: 94vw; height: 300px;">
+  <div class="community-name" style="position: absolute; top: 3rem; font-size: 6vw;">
     <p>{{channel_name}}</p>
   </div>
-  <div class="community-description">
-    {{channel_description}}
+  <div class="community-description" style="position: absolute; top: 13rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 56vw; text-align: justify; line-height: normal; font-weight: 500;">
+    <p>
+      {{channel_description}}
+    </p>
   </div>
-  <div class="community-button">
+  <div class="community-button" style="position: absolute; top: 18.5rem;">
+    {% if channel_name != "Profile" %}
+        {% if designation == "OWNER" or designation == "ADMIN" %}
+            <button style="margin-left:12px;" class="button-community" href="window.location='/@community/edit/{{channel_id}}/'">edit</button>
+            <button  style="margin-left:12px;" class="button-community" onclick="window.location='/@community/perms/{{channel_id}}'">Permission</button>
+            <Button  style="margin-left:12px;" class="button-community" onclick="window.location='/@post/new/{{channel_id}}/'">New Post</button>
+        {% elif designation == "New" %}
+        <button style="margin-left:12px;" type="button" class="button-community" onclick="window.location='/@community/join/{{channel_id}}'">Join Community</button>
+        {% elif designation == "MOD" %}
+        <Button style="margin-left:12px;" class="button-community" value="New Post" onclick="window.location='/@post/new/{{channel_id}}/'">New Post</button>
+        {% elif designation == "USER" %}
+        <Button style="margin-left:12px;" class="button-community" value="Leave Community" onclick="window.location='/@community/leave/{{channel_id}}'">Leave Community</button>
+        <button style="margin-left:12px;" class="button-community" value="New Post" onclick="window.location='/@post/new/{{channel_id}}/'">New Post</button>
+        {% endif %}
+    {% else %}
+    
+    {% endif %}
+    <!--
     <button class="button-community" style="margin-left:12px;">Join</button>
     <button class="button-community" style="margin-left:12px;">leave</button>
+    -->
   </div>
 </div>
+<main>
         <main>
             <section>
                 <div class="blog">
@@ -45,48 +66,12 @@
                         </div>
                       </div>
                       {% endif %}
-
-
-                      <!--new tag filter drop down
-                      <div-- class="filter-button">
-                        <div class="filter-menu">
-                          <div >
-                            <div class="filter-items">test</div>
-                            <div class="filter-items">teat2</div>
-                          </div>
-                        </div>
-                      </div-->
-                      <div class="filter">
-                        <div>Hover Me</div>
-                        <div class="filter-menu">
-                          <div class="filter-item">Item 1</div>
-                          <div class="filter-item">Item 2</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <div class="filter-item">Item 3</div>
-                          <!-- Add more items dynamically if needed -->
-                        </div>
-                      </div>
-                      
-
-
-
-
-
-
-                      <!--end drop down-->
-
-
                       <div id="tags">
                         <!--input value="Delete Tag" type="button" class="tagss" onclick="deletetag()"-->
                         <input value="Clear Filter" type="button" class="tagss" onclick="cleartag()">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="15.75" viewBox="0 0 576 512"><path d="M3.9 22.9C10.5 8.9 24.5 0 40 0H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L396.4 195.6C316.2 212.1 256 283 256 368c0 27.4 6.3 53.4 17.5 76.5c-1.6-.8-3.2-1.8-4.7-2.9l-64-48c-8.1-6-12.8-15.5-12.8-25.6V288.9L9 65.3C-.7 53.4-2.8 36.8 3.9 22.9zM432 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm59.3 107.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L432 345.4l-36.7-36.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6L409.4 368l-36.7 36.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L432 390.6l36.7 36.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L454.6 368l36.7-36.7z"/></svg>
+                        <br>
+
                         {% for i in community_tags %}
                           <input data-toggle="true" type="button" title={{i.description}} value="{{i.name}}" class="tagss" onclick="toggleTag(this)">
                         {% endfor %}
@@ -103,11 +88,11 @@
                     </h2>
                     <section id="posts-list">
                       {% for post in posts %}
-                        <div class="card" data-tag="{{post.tags.name}}" style="">
+                        <!--div class="card" data-tag="{{post.tags.name}}" style="">
                           <div class="card-header flex flex-center">
                             <div class="card-img">
-                              <!--img src="{{post.banner}}" alt=""-->
-                              <!--img  src="/media/post_img.jpg" alt=""-->
+                              <!--img src="{{post.banner}}" alt="">
+                              <!--img  src="/media/post_img.jpg" alt="">
                               <img src="/media/kerte-banner.png" alt="">
                             </div>
                             <div class="card-text">
@@ -124,7 +109,7 @@
                               <div class="date-time">
                                 {{post.dateofpost}}</div>
                             </div>
-                                <!--img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50"-->                              
+                                <!-img src="{{post.User.profile_pic}}" alt="{{post.User.username}}" width="50">
                               </div>
                               <div>
                                 <a href="#" style="color:black">{{post.User.username}}</a>
@@ -142,7 +127,38 @@
                             </div>
                         {% endif %}
                           </div>
-                        </div>
+                        </div-->
+                        <section class="light">
+                          <div class="container py-2">
+                            <article class="postcard light blue">
+                              <a class="postcard__img_link" href="#">
+                                <img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+                              </a>
+                              <div class="postcard__text t-dark">
+                                <h1 class="postcard__title blue"><a href="#">{{post.title}}</a></h1>
+                                <div class="postcard__subtitle small">
+                                  <time datetime="2020-05-25 12:00:00">
+                                    <i class="fas fa-calendar-alt mr-2"></i>{{post.dateofpost}}
+                                  </time>
+                                </div>                              
+                                <div class="postcard__bar"></div>
+                                <div class="postcard__preview-txt">{{post.description}}</div> 
+                                <div class="addd" style="display: flex; justify-content: space-between;">
+                                  <ul class="postcard__tagbox">
+                                    <li class="tag__item">Delete</li>
+                                    <li class="tag__item play blue">
+                                      <a href="#">Edit</a>
+                                    </li>
+                                  </ul>
+                                  <div class="postcard__subtitle small" style="display: flex;     align-items: flex-end;
+                                  font-size: 1rem; font-weight: bolder;">
+                                    <p>Abhay Tiwari</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </article>                            
+                          </div>
+                        </section>
                       {% endfor %}
                     </section>
                     <div id="load"></div>

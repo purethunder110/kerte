@@ -1,3 +1,6 @@
+body{
+  padding-top: 0;
+}
 
   .community-banner{
     height:500px;
@@ -149,28 +152,203 @@
 
 .profile-banner{
     height:250px;
-    min-width:25%;
+    min-width:95vw;
     background-image: url('https://source.unsplash.com/random/1440x1080');
     padding-top: 0%;
+    background-size: cover;
+    margin-left: -2.4vw;
   }
 
 .profile-picture{
-    height: 120px;
-    width: 120px;
+    height: 8rem;
+    width: 9vw;
     background-color: lightseagreen;
-    background-image: url('https://i.pravatar.cc/120');
+    background-image: url(https://i.pravatar.cc/120);
     border-radius: 50%;
     display: inline-block;
     position: relative;
-    top: 170px;;
-  }
+    top: 10rem;
+    left: 0.45rem;
+    background-size: cover;
+}
   .profile-name{
-    color:whitesmoke;
+    color: whitesmoke;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 69px;
+    font-size: 6vw;
     font-weight: 999;
-    position: relative;
-    top: 10px;
-    left: 120px;
+    position: absolute;
+    top: 12.25rem;
+    left: 14vw;;
+    width: fit-content;
   }
   
+  @media (max-width: 767px) {
+    body{
+      padding-left: 7vw;
+      overflow: hidden;
+    }
+  }
+
+  @media (max-width: 1416px) {
+    .profile-name{
+      font-size: 5vw;
+      left: 14.75vw;
+      top: 15.5vw;
+    }
+  }
+
+  @media (max-width: 1305px) {
+    .profile-name{
+      top: 16.5vw;
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .profile-name{
+      top: 17.5vw;
+      left: 16vw;
+    }
+
+    .profile-picture{
+      width: 10vw;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .profile-name{
+      top: 18.5vw;
+      left: 17vw;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .profile-name{
+      top: 22.5vw;
+      left: 17.85vw;
+    }
+
+    .profile-picture{
+      height: 7rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    /* .profile-name{
+      top: 22.5vw;
+      left: 17.85vw;
+    } */
+
+    .profile-picture{
+      top: 17vw;
+    }
+  }
+
+  @media (max-width: 984px) {
+    .profile-name{
+      top: 23.5vw;
+    }
+
+    .profile-picture{
+      top: 18vw;
+    }
+  }
+
+  @media (max-width: 930px) {
+    .profile-name{
+      top: 25vw;
+    }
+
+    .profile-picture{
+      top: 19vw;
+    }
+  }
+
+  @media (max-width: 880px) {
+    .profile-name{
+      top: 27vw;
+      left: 19.5vw;
+    }
+
+    .profile-picture{
+      top: 20vw;
+      width: 11vw;
+    }
+  }
+
+  @media (max-width: 840px) {
+    .profile-name{
+      top: 29vw;
+      left: 20vw;
+    }
+
+    .profile-picture{
+      top: 23vw;
+      width: 11vw;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .profile-name{
+      top: 32vw;
+      left: 19vw;
+    }
+
+    .profile-picture{
+      top: 24vw;
+      width: 13vw;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .profile-name{
+      top: 36vw;
+    }
+
+    .profile-picture{
+      top: 26vw;
+    }
+  }
+
+  @media (max-width: 660px) {
+    .profile-name{
+      top: 39vw;
+    }
+
+    .profile-picture{
+      top: 30vw;
+      height: 6rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .profile-name{
+      top: 45vw;
+    }
+
+    .profile-picture{
+      top: 34vw;
+      height: 5.5rem;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .profile-name{
+      top: 49vw;
+    }
+
+    .profile-picture{
+      top: 38vw;
+      height: 5.25rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .profile-name{
+      top: 53vw;
+    }
+
+    .profile-picture{
+      top: 42vw;
+      height: 5rem;
+    }
+  }

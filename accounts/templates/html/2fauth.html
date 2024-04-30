@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticate</title>
+    <link rel="stylesheet" href="{% static 'css/signinstyle.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script type="module" src="{% static 'axios/dist/axios.js' %}"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>Verify</header>
+        <form id="LoginForm">
+            <input type="hidden" id="csrfmiddlewaretoken" value="{{csrf_token}}">
+            <p>Enter the OTP code send to the email :<br><b>email here</b></p><br>
+            <div class="field password">
+                <div class="input-area">
+                    <input type="text" id="LoginPassword" placeholder="Enter OTP">
+                    <i class="icon fas fa-lock"></i>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+                <div class="error error-txt">Enter Your OTP</div>
+            </div>
+            <div class="pass-txt"><a href="#">Resend OTP</a></div>
+            <input type="Submit" id="submitbutton" value="Login">
+        </form>
+        <div class="sign-txt">Not Your Email? <a href="/accounts/signup">Return to Login</a></div>
+    </div>
+
+    <script src="{% static 'javascript/2fauth.js'%}"></script>
+
+</body>
+
+</html>

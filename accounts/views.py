@@ -91,3 +91,9 @@ def logoutsite(request):
 
 def remainingurl(response):
     return HttpResponse("<h1>page getting ready")
+
+def otp_verification(response):
+    return render(response,"html/2fauth.html")
+
+def twofactorauth(response):
+    return render(response,"html/2fauth.html")
