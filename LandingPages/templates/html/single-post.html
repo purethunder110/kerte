@@ -2,13 +2,14 @@
 {% load static %}
 {% block content %}
         <link rel="stylesheet" href="{% static 'css/single-post.css' %}">
-        <a href="javascript:window.history.back();">back to main page</a>
+        <a style="color:#3e2093;border:3e2093;" href="javascript:window.history.back();">back to main page</a>
         <section>
+            <img src="https://source.unsplash.com/random/1440x144" class="community-banner" alt="image_banner">
             <div class="card mb-3" id="post-area">
                 <h1 class="card-title">{{post_data.title}}</h1>
                 <p class="description">{{post_data.description}}</p>
                 <div class="card-headr">
-                    <img src="images/post_img.jpg" class="card-img-top" alt="...">
+                    
                 </div>
                 <p class="post-author flex">{{request.user.username}}<!--button type="button" class="btn btn-primary">Follow <span class="badge text-bg-secondary">264</span></button--></p>
                 <div class="card-body">

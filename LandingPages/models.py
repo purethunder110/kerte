@@ -49,6 +49,9 @@ class NewPost(models.Model):
     
     def get_userofpost(self):
         return self.User.username
+    
+    def __str__(self):
+        return f"{self.Community.name}-|-{self.title}"
 
 class community_user_group(models.Model):
     community=models.ForeignKey(Community,on_delete=models.DO_NOTHING)

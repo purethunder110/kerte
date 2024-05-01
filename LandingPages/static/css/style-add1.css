@@ -30,9 +30,9 @@
     font-family: ui-sans-serif;
     font-size: 16px;
     border-radius: 5px;
-    color: #dc3545;
+    color: #3e2093;
     background-color: #ffffff;
-    border: 1px solid #dc3545;
+    border: 1px solid #3e2093;
     cursor: pointer;
     min-width: 8.5rem;
 }
@@ -49,7 +49,7 @@
 }
 
 .tagss:hover{
-    background-color: #dc3545;
+    background-color: #3e2093;
     color: #ffffff;
 }
 

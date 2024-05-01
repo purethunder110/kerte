@@ -151,8 +151,7 @@ body{
 /*profile layout*/
 
 .profile-banner{
-    height:250px;
-    min-width:95vw;
+    height:300px;
     background-image: url('https://source.unsplash.com/random/1440x1080');
     padding-top: 0%;
     background-size: cover;

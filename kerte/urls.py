@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     #new admin sign urls
-    #path('grappelli/',include('grappelli.urls')),
+    path('grappelli/',include('grappelli.urls')),
 
     path('',include('pwa.urls')),
     #pwa config end

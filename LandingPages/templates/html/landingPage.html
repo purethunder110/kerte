@@ -42,14 +42,18 @@
                     <!--h2 class="h2">Tags</!--h2-->
                     <div class="dropdown-profile">
                       {% if designation == "OWNER" or designation == "ADMIN" %}
-                      <button id="tagcreate" class="btn btn-primary" style="display:block;color:green; min-width: 0; padding: 1.5rem 0 0.65rem 0;">
+                      <button id="tagcreate" class="btn btn-primary" style="display:block;color:#3e2093; min-width: 0; padding: 1.5rem 0 0.65rem 0;">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="12.25" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#3e2093" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
                         New Tag
                       </button>
                       <div class="modal" tabindex="-1" id="myModal">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title">New Tag</h5>
+                              
+                              <h5 class="modal-title">
+                                New Tag
+                              </h5>
                             </div>
                         <input id="token" type="hidden" value="{{csrf_token}}">
                             <div class="modal-body">
@@ -60,7 +64,7 @@
                             </div>
                             <div class="modal-footer flex flex-end">
                                 <input type="button" class="btn-primary btn-start" data-bs-dismiss="modal" value="Close" id="close-btn">
-                                <input type="submit" class="btn-primary" value="Create Tag" id="addTagbtn">
+                                <input type="submit" style="background-color:#3e2093; border:#3e2093" class="btn-primary" value="Create Tag" id="addTagbtn">
                             </div>
                           </div>
                         </div>
@@ -131,13 +135,13 @@
                         <section class="light">
                           <div class="container py-2">
                             <article class="postcard light blue">
-                              <a class="postcard__img_link" href="#">
+                              <a class="postcard__img_link" href="/@post/view/{{post.uuid}}" >
                                 <img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
                               </a>
                               <div class="postcard__text t-dark">
-                                <h1 class="postcard__title blue"><a href="#">{{post.title}}</a></h1>
+                                <h1 class="postcard__title blue"><a href="/@post/view/{{post.uuid}}">{{post.title}}</a></h1>
                                 <div class="postcard__subtitle small">
-                                  <time datetime="2020-05-25 12:00:00">
+                                  <time datetime="{{post.dateofpost}}">
                                     <i class="fas fa-calendar-alt mr-2"></i>{{post.dateofpost}}
                                   </time>
                                 </div>                              
@@ -145,14 +149,25 @@
                                 <div class="postcard__preview-txt">{{post.description}}</div> 
                                 <div class="addd" style="display: flex; justify-content: space-between;">
                                   <ul class="postcard__tagbox">
-                                    <li class="tag__item">Delete</li>
+                                    <!--li class="tag__item">Delete</li>
                                     <li class="tag__item play blue">
                                       <a href="#">Edit</a>
-                                    </li>
+                                    </li -->
+                                    {% if user.username == post.User.username %}
+                                    
+                                      <li class="tag__item"><a href="/@post/delete/{{post.uuid}}">Delete</a></li>
+                                      <li class="tag__item"><a href="/@post/edit/{{post.uuid}}">Edit</a></li>
+                                    {% elif designation == "OWNER" or designation == "ADMIN" or designation == "MOD" %}
+                                    <li class="tag__item"><a href="/@post/delete/{{post.uuid}}">Delete</a></li>
+                                    <li class="tag__item"><a href="/@post/edit/{{post.uuid}}">Edit</a></li>
+                                      <li class="tag__item"><a>Approve</a></li>
+
+                                {% endif %}
+                                
                                   </ul>
                                   <div class="postcard__subtitle small" style="display: flex;     align-items: flex-end;
                                   font-size: 1rem; font-weight: bolder;">
-                                    <p>Abhay Tiwari</p>
+                                    <p>{{post.User.username}} | {{post.User.first_name}} {{post.User.last_name}}</p>
                                   </div>
                                 </div>
                               </div>
